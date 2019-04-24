@@ -9,7 +9,7 @@
 	<context id="Mybatis3Context" targetRuntime="MyBatis3">
 		<property name="javaFileEncoding" value="UTF-8" />
 		<jdbcConnection driverClass="com.mysql.jdbc.Driver"
-			connectionURL="jdbc:mysql://172.16.100.53:3306/w_simple?useLegacyDatetimeCode=false&amp;serverTimezone=UTC&amp;nullCatalogMeansCurrent=true"
+			connectionURL="jdbc:mysql://www.53.test:3306/w_simple?useLegacyDatetimeCode=false&amp;serverTimezone=UTC&amp;nullCatalogMeansCurrent=true"
 			userId="root"
 			password="123456">
 		</jdbcConnection>
