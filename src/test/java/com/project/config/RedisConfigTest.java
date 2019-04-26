@@ -10,12 +10,14 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.data.redis.core.ValueOperations;
+import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import com.project.model.entity.sys.User;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @SpringBootTest
+@ActiveProfiles("test")
 public class RedisConfigTest {
 
 	@Autowired

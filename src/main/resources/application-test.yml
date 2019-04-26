@@ -1,6 +1,3 @@
-server:
-  port: 8081
-
 spring:
   datasource:
     driver-class-name: com.mysql.jdbc.Driver
@@ -20,10 +17,10 @@ spring:
   application:
     name: Spring-boot-rabbitmq
   rabbitmq:
-    host: 127.0.0.1
+    host: www.39.test
     port: 5672
-    username: hui07
-    password: 123456
+    username: guest
+    password: guest
 
 mybatis-plus:
     #刷新mapper 调试神器

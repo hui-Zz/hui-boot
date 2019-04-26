@@ -163,7 +163,7 @@ public abstract class CrudController<PO, PK extends Serializable> {
 	 */
 	@ApiOperation(value = "批量修改")
 	@ApiImplicitParams({
-			@ApiImplicitParam(name = "json", value = "json多对象数据", required = true, paramType = "query", dataType = "long")
+			@ApiImplicitParam(name = "json", value = "json多对象数据", required = true, paramType = "query", dataType = "string")
 	})
 	@PutMapping()
 	public ResponseMessage update(String json) {

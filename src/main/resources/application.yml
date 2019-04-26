@@ -1,10 +1,10 @@
 spring:
   profiles:
     active: dev
-
 server:
   tomcat:
     uri-encoding: UTF-8
+#  port: 8080
 
 mybatis-plus:
   # 如果是放在resource目录 classpath:/mapper/*Mapper.xml
