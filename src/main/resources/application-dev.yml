@@ -1,29 +1,14 @@
 spring:
-  datasource:
-    driver-class-name: com.mysql.jdbc.Driver
-    url: jdbc:mysql://www.53.test:3306/w_simple?useUnicode=true&characterEncoding=utf8&serverTimezone=Asia/Shanghai&useSSL=true
-    username: root
-    password: 123456
-  redis:
-    database: 0
-    host: 127.0.0.1
-    port: 6379
-    jedis:
-      pool:
-        max-idle: 8
-        min-idle: 0
-        max-wait: -1
-        max-active: 8
-  application:
-    name: Spring-boot-rabbitmq
-  rabbitmq:
-    host: 127.0.0.1
-    port: 5672
-    username: hui07
-    password: 123456
+  profiles:
+    include: dev-mysql,dev-redis
+
 #  jackson:
 #    date-format: yyyy-MM-dd HH:mm:ss
 #    timezone: GMT+8
+
+logging:
+  level:
+    io.swagger.models.parameters.AbstractSerializableParameter: error
 
 mybatis-plus:
     #刷新mapper 调试神器
