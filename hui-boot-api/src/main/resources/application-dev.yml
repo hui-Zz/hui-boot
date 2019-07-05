@@ -1,6 +1,6 @@
 spring:
   profiles:
-    include: dev-mysql,dev-redis
+    include: dev-mysql
 
 #  jackson:
 #    date-format: yyyy-MM-dd HH:mm:ss
@@ -8,6 +8,7 @@ spring:
 
 logging:
   level:
+    com.hui: debug
     io.swagger.models.parameters.AbstractSerializableParameter: error
 
 mybatis-plus:

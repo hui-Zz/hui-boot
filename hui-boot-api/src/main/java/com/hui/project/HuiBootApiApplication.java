@@ -1,21 +1,18 @@
-package com.project;
+package com.hui.project;
 
 import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.scheduling.annotation.EnableScheduling;
 
-/**
- * @author hui07
- */
 //@ComponentScan("com.project")
 @SpringBootApplication
-@MapperScan("com.project.mapper")
+@MapperScan("com.hui.project.mapper")
 @EnableScheduling
-public class SimpleApplication {
+public class HuiBootApiApplication {
 
 	public static void main(String[] args) {
-		SpringApplication.run(SimpleApplication.class, args);
+		SpringApplication.run(HuiBootApiApplication.class, args);
 	}
 
 	//@Bean

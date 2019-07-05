@@ -1,6 +1,6 @@
 spring:
   profiles:
-    include: dev-mysql,dev-redis
+    include: test-mysql
 
 mybatis-plus:
     #刷新mapper 调试神器

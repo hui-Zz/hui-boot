@@ -18,11 +18,11 @@
  * IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN
  * CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
-package com.project.generate;
+package com.hui.project.generate;
 
 import org.junit.Test;
 
-import com.project.common.generate.MysqlGenerator;
+import com.hui.project.common.generate.MysqlGenerator;
 
 /**
  * <p>
@@ -33,9 +33,9 @@ import com.project.common.generate.MysqlGenerator;
  */
 public class MysqlGeneratorTest {
 
-    @Test
-    public void generator() {
-        MysqlGenerator mysqlGenerator = new MysqlGenerator();
-        mysqlGenerator.generator("sys_role");
-    }
+	@Test
+	public void generator() {
+		MysqlGenerator mysqlGenerator = new MysqlGenerator();
+		mysqlGenerator.generator("slyx_event");
+	}
 }
