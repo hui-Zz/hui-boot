@@ -1,9 +1,9 @@
 package com.hui.project.config;
 
-import org.springframework.context.annotation.Configuration;
-import org.springframework.session.data.redis.config.annotation.web.http.EnableRedisHttpSession;
-
-@Configuration
-@EnableRedisHttpSession(maxInactiveIntervalInSeconds = 86400 * 30)
+/**
+ * 分布式集群session共享
+ */
+//@Configuration
+//@EnableRedisHttpSession(maxInactiveIntervalInSeconds = 86400 * 30)
 public class SessionConfig {
 }
