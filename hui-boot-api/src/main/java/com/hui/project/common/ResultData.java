@@ -1,7 +1,5 @@
 package com.hui.project.common;
 
-import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
-
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;

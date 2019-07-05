@@ -12,7 +12,7 @@ import springfox.documentation.swagger2.annotations.EnableSwagger2;
 
 @Configuration
 @EnableSwagger2
-@Profile({"dev","test"})
+@Profile({"dev", "test"})
 public class SwaggerConfig {
 	@Bean
 	public Docket swaggerSpringMvcPlugin() {

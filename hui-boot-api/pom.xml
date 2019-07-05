@@ -55,11 +55,11 @@
 						<groupId>org.springframework.boot</groupId>
 						<artifactId>spring-boot-starter-data-redis</artifactId>
 				</dependency>
-<!--				加载spring-session-data-redis必须开启Redis-->
-<!--				<dependency>-->
-<!--						<groupId>org.springframework.session</groupId>-->
-<!--						<artifactId>spring-session-data-redis</artifactId>-->
-<!--				</dependency>-->
+				<!--				加载spring-session-data-redis必须开启Redis-->
+				<!--				<dependency>-->
+				<!--						<groupId>org.springframework.session</groupId>-->
+				<!--						<artifactId>spring-session-data-redis</artifactId>-->
+				<!--				</dependency>-->
 				<dependency>
 						<groupId>org.springframework.boot</groupId>
 						<artifactId>spring-boot-starter-amqp</artifactId>

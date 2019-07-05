@@ -1,11 +1,13 @@
 package com.hui.project.model.entity.sys;
 
-import com.baomidou.mybatisplus.annotation.TableName;
 import java.time.LocalDateTime;
+
 import com.baomidou.mybatisplus.annotation.FieldFill;
-import com.hui.project.common.base.BaseModel;
-import com.baomidou.mybatisplus.annotation.TableLogic;
 import com.baomidou.mybatisplus.annotation.TableField;
+import com.baomidou.mybatisplus.annotation.TableLogic;
+import com.baomidou.mybatisplus.annotation.TableName;
+import com.hui.project.common.base.BaseModel;
+
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;

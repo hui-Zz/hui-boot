@@ -3,7 +3,7 @@ spring:
     include: test-mysql
 
 mybatis-plus:
-    #刷新mapper 调试神器
-    refresh-mapper: true
-    #打印Mybatis的SQL
-    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+  #刷新mapper 调试神器
+  refresh-mapper: true
+  #打印Mybatis的SQL
+  log-impl: org.apache.ibatis.logging.stdout.StdOutImpl

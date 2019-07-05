@@ -57,162 +57,161 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor(access = AccessLevel.PRIVATE)
 public abstract class JacksonUtils {
 
-    private final static ObjectMapper objectMapper;
+	private final static ObjectMapper objectMapper;
 
-    static {
-        objectMapper = initObjectMapper(new ObjectMapper());
-    }
+	static {
+		objectMapper = initObjectMapper(new ObjectMapper());
+	}
 
-    /**
-     * 转换Json
-     *
-     * @param object
-     * @return
-     */
-    public static String toJson(Object object) {
-        if (isCharSequence(object)) {
-            return (String) object;
-        }
-        try {
-            return getObjectMapper().writeValueAsString(object);
-        } catch (JsonProcessingException e) {
-            throw new RuntimeException(e);
-        }
-    }
+	/**
+	 * 转换Json
+	 *
+	 * @param object
+	 * @return
+	 */
+	public static String toJson(Object object) {
+		if (isCharSequence(object)) {
+			return (String) object;
+		}
+		try {
+			return getObjectMapper().writeValueAsString(object);
+		} catch (JsonProcessingException e) {
+			throw new RuntimeException(e);
+		}
+	}
 
-    /**
-     * 获取ObjectMapper
-     *
-     * @return
-     */
-    public static ObjectMapper getObjectMapper() {
-        return objectMapper;
-    }
+	/**
+	 * 获取ObjectMapper
+	 *
+	 * @return
+	 */
+	public static ObjectMapper getObjectMapper() {
+		return objectMapper;
+	}
 
-    /**
-     * 初始化 ObjectMapper
-     *
-     * @param objectMapper
-     * @return
-     */
-    public static ObjectMapper initObjectMapper(ObjectMapper objectMapper) {
-        if (Objects.isNull(objectMapper)) {
-            objectMapper = new ObjectMapper();
-        }
-        return doInitObjectMapper(objectMapper);
-    }
+	/**
+	 * 初始化 ObjectMapper
+	 *
+	 * @param objectMapper
+	 * @return
+	 */
+	public static ObjectMapper initObjectMapper(ObjectMapper objectMapper) {
+		if (Objects.isNull(objectMapper)) {
+			objectMapper = new ObjectMapper();
+		}
+		return doInitObjectMapper(objectMapper);
+	}
 
-    /**
-     * 初始化 ObjectMapper 时间方法
-     *
-     * @param objectMapper
-     * @return
-     */
-    private static ObjectMapper doInitObjectMapper(ObjectMapper objectMapper) {
-        objectMapper.disable(SerializationFeature.WRITE_DATES_AS_TIMESTAMPS);
-        //不显示为null的字段
-        objectMapper.disable(SerializationFeature.FAIL_ON_EMPTY_BEANS);
-        objectMapper.disable(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES);
-        // 忽略不能转移的字符
-        objectMapper.configure(JsonParser.Feature.ALLOW_BACKSLASH_ESCAPING_ANY_CHARACTER, true);
-        // 过滤对象的null属性.
-        objectMapper.setSerializationInclusion(JsonInclude.Include.NON_NULL);
-        //忽略transient
-        objectMapper.configure(MapperFeature.PROPAGATE_TRANSIENT_MARKER, true);
-        return registerModule(objectMapper);
-    }
+	/**
+	 * 初始化 ObjectMapper 时间方法
+	 *
+	 * @param objectMapper
+	 * @return
+	 */
+	private static ObjectMapper doInitObjectMapper(ObjectMapper objectMapper) {
+		objectMapper.disable(SerializationFeature.WRITE_DATES_AS_TIMESTAMPS);
+		//不显示为null的字段
+		objectMapper.disable(SerializationFeature.FAIL_ON_EMPTY_BEANS);
+		objectMapper.disable(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES);
+		// 忽略不能转移的字符
+		objectMapper.configure(JsonParser.Feature.ALLOW_BACKSLASH_ESCAPING_ANY_CHARACTER, true);
+		// 过滤对象的null属性.
+		objectMapper.setSerializationInclusion(JsonInclude.Include.NON_NULL);
+		//忽略transient
+		objectMapper.configure(MapperFeature.PROPAGATE_TRANSIENT_MARKER, true);
+		return registerModule(objectMapper);
+	}
 
-    /**
-     * 注册模块
-     *
-     * @param objectMapper
-     * @return
-     */
-    private static ObjectMapper registerModule(ObjectMapper objectMapper) {
-        SimpleModule simpleModule = new SimpleModule();
-        simpleModule.addSerializer(LocalDateTime.class, new LocalDateTimeSerializer(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss")));
-        simpleModule.addSerializer(LocalDate.class, new LocalDateSerializer(DateTimeFormatter.ofPattern("yyyy-MM-dd")));
-        simpleModule.addSerializer(LocalTime.class, new LocalTimeSerializer(DateTimeFormatter.ofPattern("HH:mm:ss")));
-        simpleModule.addSerializer(Long.class, ToStringSerializer.instance);
-        objectMapper.registerModule(new JavaTimeModule());
-        objectMapper.registerModule(simpleModule);
-        return objectMapper;
-    }
+	/**
+	 * 注册模块
+	 *
+	 * @param objectMapper
+	 * @return
+	 */
+	private static ObjectMapper registerModule(ObjectMapper objectMapper) {
+		SimpleModule simpleModule = new SimpleModule();
+		simpleModule.addSerializer(LocalDateTime.class, new LocalDateTimeSerializer(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss")));
+		simpleModule.addSerializer(LocalDate.class, new LocalDateSerializer(DateTimeFormatter.ofPattern("yyyy-MM-dd")));
+		simpleModule.addSerializer(LocalTime.class, new LocalTimeSerializer(DateTimeFormatter.ofPattern("HH:mm:ss")));
+		simpleModule.addSerializer(Long.class, ToStringSerializer.instance);
+		objectMapper.registerModule(new JavaTimeModule());
+		objectMapper.registerModule(simpleModule);
+		return objectMapper;
+	}
 
+	/**
+	 * 包装 MappingJackson2HttpMessageConverter
+	 *
+	 * @return
+	 */
+	public static Consumer<HttpMessageConverter<?>> wrapperObjectMapper() {
+		return converter -> {
+			if (converter instanceof MappingJackson2HttpMessageConverter) {
+				MappingJackson2HttpMessageConverter httpMessageConverter = (MappingJackson2HttpMessageConverter) converter;
+				registerModule(httpMessageConverter.getObjectMapper());
+			}
+		};
+	}
 
-    /**
-     * 包装 MappingJackson2HttpMessageConverter
-     *
-     * @return
-     */
-    public static Consumer<HttpMessageConverter<?>> wrapperObjectMapper() {
-        return converter -> {
-            if (converter instanceof MappingJackson2HttpMessageConverter) {
-                MappingJackson2HttpMessageConverter httpMessageConverter = (MappingJackson2HttpMessageConverter) converter;
-                registerModule(httpMessageConverter.getObjectMapper());
-            }
-        };
-    }
+	/**
+	 * <p>
+	 * 是否为CharSequence类型
+	 * </p>
+	 *
+	 * @param object
+	 * @return
+	 */
+	public static Boolean isCharSequence(Object object) {
+		return !Objects.isNull(object) && StringUtils.isCharSequence(object.getClass());
+	}
 
-    /**
-     * <p>
-     * 是否为CharSequence类型
-     * </p>
-     *
-     * @param object
-     * @return
-     */
-    public static Boolean isCharSequence(Object object) {
-        return !Objects.isNull(object) && StringUtils.isCharSequence(object.getClass());
-    }
+	/**
+	 * Json转换为对象 转换失败返回null
+	 *
+	 * @param json
+	 * @return
+	 */
+	public static Object parse(String json) {
+		Object object = null;
+		try {
+			object = getObjectMapper().readValue(json, Object.class);
+		} catch (Exception ignored) {
+		}
+		return object;
+	}
 
-    /**
-     * Json转换为对象 转换失败返回null
-     *
-     * @param json
-     * @return
-     */
-    public static Object parse(String json) {
-        Object object = null;
-        try {
-            object = getObjectMapper().readValue(json, Object.class);
-        } catch (Exception ignored) {
-        }
-        return object;
-    }
+	/**
+	 * Json转换为对象 转换失败返回null
+	 *
+	 * @param json
+	 * @param clazz
+	 * @param <T>
+	 * @return
+	 */
+	public static <T> T readValue(String json, Class<T> clazz) {
+		T t = null;
+		try {
+			t = getObjectMapper().readValue(json, clazz);
+		} catch (Exception ignored) {
+		}
+		return t;
+	}
 
-    /**
-     * Json转换为对象 转换失败返回null
-     *
-     * @param json
-     * @param clazz
-     * @param <T>
-     * @return
-     */
-    public static <T> T readValue(String json, Class<T> clazz) {
-        T t = null;
-        try {
-            t = getObjectMapper().readValue(json, clazz);
-        } catch (Exception ignored) {
-        }
-        return t;
-    }
-
-    /**
-     * Json转换为对象 转换失败返回null
-     *
-     * @param json
-     * @param valueTypeRef
-     * @param <T>
-     * @return
-     */
-    public static <T> T readValue(String json, TypeReference valueTypeRef) {
-        T t = null;
-        try {
-            t = getObjectMapper().readValue(json, valueTypeRef);
-        } catch (Exception ignored) {
-        }
-        return t;
-    }
+	/**
+	 * Json转换为对象 转换失败返回null
+	 *
+	 * @param json
+	 * @param valueTypeRef
+	 * @param <T>
+	 * @return
+	 */
+	public static <T> T readValue(String json, TypeReference valueTypeRef) {
+		T t = null;
+		try {
+			t = getObjectMapper().readValue(json, valueTypeRef);
+		} catch (Exception ignored) {
+		}
+		return t;
+	}
 
 }

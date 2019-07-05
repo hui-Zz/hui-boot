@@ -60,7 +60,7 @@ public class SuperGenerator {
 			// 自定义输出文件目录
 			@Override
 			public String outputFile(TableInfo tableInfo) {
-				return getResourcePath() + "/mapper/" + tableInfo.getEntityName() + "Mapper.xml";
+				return getResourcePath() + "/mapper/" + tableInfo.getEntityName() + "Mapper.xml" ;
 			}
 		}));
 	}
@@ -96,7 +96,7 @@ public class SuperGenerator {
 				//自定义实体父类
 				.setSuperEntityClass("BaseModel")
 				// 自定义实体，公共字段
-				.setSuperEntityColumns("id","create_time","update_time")
+				.setSuperEntityColumns("id", "create_time", "update_time")
 				.setTableFillList(tableFillList)
 				// 自定义 mapper 父类
 				//.setSuperMapperClass("com.hui.project.common.base.BaseMapper")
