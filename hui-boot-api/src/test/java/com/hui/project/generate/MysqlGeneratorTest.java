@@ -22,8 +22,6 @@ package com.hui.project.generate;
 
 import org.junit.Test;
 
-import com.hui.project.common.generate.MysqlGenerator;
-
 /**
  * <p>
  * MysqlGeneratorTest
@@ -36,6 +34,15 @@ public class MysqlGeneratorTest {
 	@Test
 	public void generator() {
 		MysqlGenerator mysqlGenerator = new MysqlGenerator();
-		mysqlGenerator.generator("slyx_event");
+		//mysqlGenerator.generator("slyx_dynamic_score_item", "0");
+
+		//mysqlGenerator.generator("slyx_dynamic", "et","dto");
+		//mysqlGenerator.generator("slyx_event", "et","dto");
+		//mysqlGenerator.generator("slyx_event_note", "et","dto");
+		//mysqlGenerator.generator("slyx_event_user_r", "et","dto");
+
+		//mysqlGenerator.generator("slyx_schedule_event_r", "0","-c");
+		//mysqlGenerator.generator("slyx_dynamic_content", "0","-c");
+		//mysqlGenerator.generator("slyx_dynamic_timeline_r", "0","-c");
 	}
 }

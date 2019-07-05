@@ -18,7 +18,7 @@
  * IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN
  * CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
-package com.hui.project.common.generate;
+package com.hui.project.generate;
 
 import com.baomidou.mybatisplus.generator.AutoGenerator;
 
@@ -36,10 +36,10 @@ public class MysqlGenerator extends SuperGenerator {
 	 * MySQL generator
 	 * </p>
 	 */
-	public void generator(String tableName) {
+	public void generator(String tableName, String... huiTempate) {
 
 		// 代码生成器
-		AutoGenerator mpg = getAutoGenerator(tableName);
+		AutoGenerator mpg = getAutoGenerator(tableName, huiTempate);
 		mpg.execute();
 		if (tableName == null) {
 			System.err.println(" Generator Success !");

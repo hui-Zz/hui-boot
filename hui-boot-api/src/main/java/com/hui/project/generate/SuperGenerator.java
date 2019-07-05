@@ -1,12 +1,13 @@
-package com.hui.project.common.generate;
+package com.hui.project.generate;
 
 import java.io.File;
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Objects;
+
+import org.apache.commons.lang3.ArrayUtils;
 
 import com.baomidou.mybatisplus.annotation.DbType;
 import com.baomidou.mybatisplus.annotation.FieldFill;
@@ -20,7 +21,6 @@ import com.baomidou.mybatisplus.generator.config.StrategyConfig;
 import com.baomidou.mybatisplus.generator.config.TemplateConfig;
 import com.baomidou.mybatisplus.generator.config.converts.MySqlTypeConvert;
 import com.baomidou.mybatisplus.generator.config.po.TableFill;
-import com.baomidou.mybatisplus.generator.config.po.TableInfo;
 import com.baomidou.mybatisplus.generator.config.rules.DbColumnType;
 import com.baomidou.mybatisplus.generator.config.rules.IColumnType;
 import com.baomidou.mybatisplus.generator.config.rules.NamingStrategy;
@@ -30,9 +30,11 @@ import com.baomidou.mybatisplus.generator.config.rules.NamingStrategy;
  * 代码生成器父类
  * </p>
  *
- * @author Caratacus
+ * @author hui
  */
 public class SuperGenerator {
+
+	static String[] huiTempate = {"0"};
 
 	/**
 	 * 获取TemplateConfig
@@ -40,7 +42,17 @@ public class SuperGenerator {
 	 * @return
 	 */
 	protected TemplateConfig getTemplateConfig() {
-		return new TemplateConfig().setXml(null);
+		TemplateConfig templateConfig = new TemplateConfig().setXml(null);
+		if (ArrayUtils.contains(huiTempate, "et")) {
+			templateConfig.setController(null)
+					.setService(null)
+					.setServiceImpl(null)
+					.setMapper(null);
+		}
+		if (ArrayUtils.contains(huiTempate, "-c")) {
+			templateConfig.setController(null);
+		}
+		return templateConfig;
 	}
 
 	/**
@@ -49,20 +61,70 @@ public class SuperGenerator {
 	 * @return
 	 */
 	protected InjectionConfig getInjectionConfig() {
+		// 自定义生成模板
+		List<FileOutConfig> focList = new ArrayList<FileOutConfig>();
+		if (ArrayUtils.contains(huiTempate, "0")
+				|| ArrayUtils.contains(huiTempate, "dto")) {
+			//focList.add(new FileOutConfig("/templates/entityPageInput.java.vm") {
+			//	// 自定义输出文件目录
+			//	@Override
+			//	public String outputFile(TableInfo tableInfo) {
+			//		return getRootPath() + "/../slyx-schedule-common/src/main/java/cn/duc/cloudservice/slyx/schedule/common/dto/dynamic/Describe"
+			//		+ underlineToPascal(tableInfo.getName().replace("slyx_", "")) + "PageInput.java";
+			//	}
+			//});
+		}
 		return new InjectionConfig() {
 			@Override
 			public void initMap() {
 				Map<String, Object> map = new HashMap<>();
+				String tableName = this.getConfig().getTableInfoList().get(0).getName();
+				String tableComment = this.getConfig().getTableInfoList().get(0).getComment();
+				String modulePath = tableName.replace("sys_", "");
+				map.put("tableComment", tableComment.replace("表", ""));
+				map.put("tableNameCamel", underlineToCamel(tableName));
+				map.put("tableNamePascal", underlineToPascal(tableName));
+				map.put("objPath", underlineToCamel(modulePath));
+				map.put("obj", underlineToPascal(modulePath));
 				this.setMap(map);
 			}
-		}.setFileOutConfigList(Collections.singletonList(new FileOutConfig(
-				"/templates/mapper.xml.vm") {
-			// 自定义输出文件目录
-			@Override
-			public String outputFile(TableInfo tableInfo) {
-				return getResourcePath() + "/mapper/" + tableInfo.getEntityName() + "Mapper.xml" ;
+		}.setFileOutConfigList(focList);
+	}
+
+	/**
+	 * 下划线格式字符串转换为驼峰格式字符串
+	 *
+	 * @param param
+	 * @return
+	 */
+	protected String underlineToCamel(String param) {
+		if (param == null || "".equals(param.trim())) {
+			return "" ;
+		}
+		int len = param.length();
+		StringBuilder sb = new StringBuilder(len);
+		for (int i = 0; i < len; i++) {
+			char c = param.charAt(i);
+			if (c == '_') {
+				if (++i < len) {
+					sb.append(Character.toUpperCase(param.charAt(i)));
+				}
+			} else {
+				sb.append(c);
 			}
-		}));
+		}
+		return sb.toString();
+	}
+
+	/**
+	 * 下划线格式字符串转换为帕斯卡格式字符串
+	 *
+	 * @param param
+	 * @return
+	 */
+	protected String underlineToPascal(String param) {
+		String pascalString = underlineToCamel(param);
+		return pascalString.substring(0, 1).toUpperCase() + pascalString.substring(1);
 	}
 
 	/**
@@ -146,20 +208,23 @@ public class SuperGenerator {
 				.setTypeConvert(new MySqlTypeConvert() {
 					@Override
 					public IColumnType processTypeConvert(GlobalConfig globalConfig, String fieldType) {
-						if (fieldType.toLowerCase().equals("bit")) {
+						if ("bit".equals(fieldType.toLowerCase()) || "tinyint(1)".equals(fieldType.toLowerCase())) {
 							return DbColumnType.BOOLEAN;
 						}
-						if (fieldType.toLowerCase().equals("tinyint")) {
+						if ("tinyint".equals(fieldType.toLowerCase())) {
 							return DbColumnType.BOOLEAN;
 						}
-						if (fieldType.toLowerCase().equals("date")) {
+						if ("date".equals(fieldType.toLowerCase())) {
 							return DbColumnType.LOCAL_DATE;
 						}
-						if (fieldType.toLowerCase().equals("time")) {
+						if ("time".equals(fieldType.toLowerCase())) {
 							return DbColumnType.LOCAL_TIME;
 						}
-						if (fieldType.toLowerCase().equals("datetime")) {
+						if ("datetime".equals(fieldType.toLowerCase())) {
 							return DbColumnType.LOCAL_DATE_TIME;
+						}
+						if ("int(11) unsigned".equals(fieldType.toLowerCase())) {
+							return DbColumnType.LONG;
 						}
 						return super.processTypeConvert(globalConfig, fieldType);
 					}
@@ -188,12 +253,13 @@ public class SuperGenerator {
 				.setAuthor("hui") //作者
 				.setSwagger2(true) // 开启 swagger2 模式
 				//自定义文件命名，注意 %s 会自动填充表实体属性！
-				.setEntityName("%s")
+				.setEntityName("%sEntity")
+				.setControllerName("%sController")
 				.setMapperName("%sMapper")
 				.setXmlName("%sMapper")
 				.setServiceName("%sService")
 				.setServiceImplName("%sServiceImpl")
-				.setControllerName("%sController");
+				;
 	}
 
 	/**
@@ -212,7 +278,7 @@ public class SuperGenerator {
 	 * @return
 	 */
 	protected String getJavaPath() {
-		return getRootPath() + "/src/main/java";
+		return getRootPath() + "/src/main/java" ;
 	}
 
 	/**
@@ -221,7 +287,7 @@ public class SuperGenerator {
 	 * @return
 	 */
 	protected String getResourcePath() {
-		return getRootPath() + "/src/main/resources";
+		return getRootPath() + "/src/main/resources" ;
 	}
 
 	/**
@@ -230,7 +296,8 @@ public class SuperGenerator {
 	 * @param tableName
 	 * @return
 	 */
-	protected AutoGenerator getAutoGenerator(String tableName) {
+	protected AutoGenerator getAutoGenerator(String tableName, String... diyTempate) {
+		huiTempate = diyTempate;
 		return new AutoGenerator()
 				// 全局配置
 				.setGlobalConfig(getGlobalConfig())
