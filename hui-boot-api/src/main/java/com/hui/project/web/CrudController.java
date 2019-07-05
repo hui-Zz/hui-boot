@@ -1,4 +1,4 @@
-package com.hui.project.common.base;
+package com.hui.project.web;
 
 import static com.hui.project.common.ResponseMessage.created;
 import static com.hui.project.common.ResponseMessage.ok;
@@ -26,6 +26,7 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 import com.alibaba.fastjson.JSON;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.hui.project.common.ResponseMessage;
+import com.hui.project.common.base.BaseService;
 import com.hui.project.common.utils.ClassUtils;
 
 import io.swagger.annotations.ApiImplicitParam;

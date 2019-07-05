@@ -49,19 +49,6 @@ public class ResponseMessage implements Serializable {
 
 	private transient String callback;
 
-	public Map<String, Object> toMap() {
-		Map<String, Object> map = new HashMap<>();
-		map.put("success", this.success);
-		if (data != null) {
-			map.put("data", this.getData());
-		}
-		if (message != null) {
-			map.put("message", this.getMessage());
-		}
-		map.put("code", this.getCode());
-		return map;
-	}
-
 	protected ResponseMessage(String message) {
 		this.code = 500;
 		this.message = message;
@@ -77,6 +64,43 @@ public class ResponseMessage implements Serializable {
 	protected ResponseMessage(boolean success, Object data, int code) {
 		this(success, data);
 		this.code = code;
+	}
+
+	public static ResponseMessage fromJson(String json) {
+		return JSON.parseObject(json, ResponseMessage.class);
+	}
+
+	public static ResponseMessage ok() {
+		return ok(null);
+	}
+
+	public static ResponseMessage ok(Object data) {
+		return new ResponseMessage(true, data);
+	}
+
+	public static ResponseMessage created(Object data) {
+		return new ResponseMessage(true, data, 201);
+	}
+
+	public static ResponseMessage error(String message) {
+		return new ResponseMessage(message);
+	}
+
+	public static ResponseMessage error(String message, int code) {
+		return new ResponseMessage(message).setCode(code);
+	}
+
+	public Map<String, Object> toMap() {
+		Map<String, Object> map = new HashMap<>();
+		map.put("success", this.success);
+		if (data != null) {
+			map.put("data", this.getData());
+		}
+		if (message != null) {
+			map.put("message", this.getMessage());
+		}
+		map.put("code", this.getCode());
+		return map;
 	}
 
 	public ResponseMessage include(Class<?> type, String... fields) {
@@ -217,10 +241,6 @@ public class ResponseMessage implements Serializable {
 		return this;
 	}
 
-	public static ResponseMessage fromJson(String json) {
-		return JSON.parseObject(json, ResponseMessage.class);
-	}
-
 	public Map<Class<?>, Set<String>> getExcludes() {
 		return excludes;
 	}
@@ -234,12 +254,12 @@ public class ResponseMessage implements Serializable {
 		return this;
 	}
 
-	public void setOnlyData(boolean onlyData) {
-		this.onlyData = onlyData;
-	}
-
 	public boolean isOnlyData() {
 		return onlyData;
+	}
+
+	public void setOnlyData(boolean onlyData) {
+		this.onlyData = onlyData;
 	}
 
 	public ResponseMessage callback(String callback) {
@@ -257,26 +277,6 @@ public class ResponseMessage implements Serializable {
 
 	public void setMessage(String message) {
 		this.message = message;
-	}
-
-	public static ResponseMessage ok() {
-		return ok(null);
-	}
-
-	public static ResponseMessage ok(Object data) {
-		return new ResponseMessage(true, data);
-	}
-
-	public static ResponseMessage created(Object data) {
-		return new ResponseMessage(true, data, 201);
-	}
-
-	public static ResponseMessage error(String message) {
-		return new ResponseMessage(message);
-	}
-
-	public static ResponseMessage error(String message, int code) {
-		return new ResponseMessage(message).setCode(code);
 	}
 
 }

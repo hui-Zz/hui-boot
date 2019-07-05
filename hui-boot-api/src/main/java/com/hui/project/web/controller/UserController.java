@@ -1,4 +1,4 @@
-package com.hui.project.web;
+package com.hui.project.web.controller;
 
 import java.util.UUID;
 
@@ -10,9 +10,9 @@ import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.hui.project.common.base.CrudController;
 import com.hui.project.model.entity.sys.User;
 import com.hui.project.service.UserService;
+import com.hui.project.web.CrudController;
 
 import io.swagger.annotations.Api;
 
@@ -23,7 +23,7 @@ import io.swagger.annotations.Api;
  *
  * @author hui
  */
-@Api(tags = {"User"}, description = "用户表相关接口")
+@Api(tags = {"用户相关接口"})
 @RestController
 @RequestMapping(value = "/user", produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
 @Validated
