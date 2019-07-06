@@ -22,55 +22,59 @@
 
 		<properties>
 				<java.version>1.8</java.version>
+				<hui-boot-common.version>0.0.1-SNAPSHOT</hui-boot-common.version>
 				<swagger.version>2.8.0</swagger.version>
 				<mybatisplus-boot-starter.version>3.1.0</mybatisplus-boot-starter.version>
 				<jsonwebtoken.version>0.9.1</jsonwebtoken.version>
 				<fastjson.version>1.2.47</fastjson.version>
+				<fastdfs-client-java.version>1.27-RELEASE</fastdfs-client-java.version>
 				<commons-lang3.version>3.8.1</commons-lang3.version>
 				<modelmapper.version>2.3.1</modelmapper.version>
 		</properties>
 
-		<dependencies>
-				<dependency>
-						<groupId>org.projectlombok</groupId>
-						<artifactId>lombok</artifactId>
-						<optional>true</optional>
-				</dependency>
-				<dependency>
-						<groupId>io.springfox</groupId>
-						<artifactId>springfox-swagger2</artifactId>
-						<version>${swagger.version}</version>
-				</dependency>
-				<dependency>
-						<groupId>io.springfox</groupId>
-						<artifactId>springfox-swagger-ui</artifactId>
-						<version>${swagger.version}</version>
-				</dependency>
-				<dependency>
-						<groupId>com.alibaba</groupId>
-						<artifactId>fastjson</artifactId>
-						<version>${fastjson.version}</version>
-				</dependency>
-				<dependency>
-						<groupId>io.jsonwebtoken</groupId>
-						<artifactId>jjwt</artifactId>
-						<version>${jsonwebtoken.version}</version>
-				</dependency>
-				<dependency>
-						<groupId>org.apache.commons</groupId>
-						<artifactId>commons-lang3</artifactId>
-						<version>${commons-lang3.version}</version>
-				</dependency>
-				<dependency>
-						<groupId>org.csource</groupId>
-						<artifactId>fastdfs-client-java</artifactId>
-						<version>1.27-RELEASE</version>
-				</dependency>
-				<dependency>
-						<groupId>org.modelmapper</groupId>
-						<artifactId>modelmapper</artifactId>
-						<version>${modelmapper.version}</version>
-				</dependency>
-		</dependencies>
+		<dependencyManagement>
+				<dependencies>
+						<dependency>
+								<groupId>com.hui.project</groupId>
+								<artifactId>hui-boot-common</artifactId>
+								<version>${hui-boot-common.version}</version>
+						</dependency>
+						<dependency>
+								<groupId>io.springfox</groupId>
+								<artifactId>springfox-swagger2</artifactId>
+								<version>${swagger.version}</version>
+						</dependency>
+						<dependency>
+								<groupId>io.springfox</groupId>
+								<artifactId>springfox-swagger-ui</artifactId>
+								<version>${swagger.version}</version>
+						</dependency>
+						<dependency>
+								<groupId>com.alibaba</groupId>
+								<artifactId>fastjson</artifactId>
+								<version>${fastjson.version}</version>
+						</dependency>
+						<dependency>
+								<groupId>io.jsonwebtoken</groupId>
+								<artifactId>jjwt</artifactId>
+								<version>${jsonwebtoken.version}</version>
+						</dependency>
+						<dependency>
+								<groupId>org.apache.commons</groupId>
+								<artifactId>commons-lang3</artifactId>
+								<version>${commons-lang3.version}</version>
+						</dependency>
+						<dependency>
+								<groupId>org.csource</groupId>
+								<artifactId>fastdfs-client-java</artifactId>
+								<version>${fastdfs-client-java.version}</version>
+						</dependency>
+						<dependency>
+								<groupId>org.modelmapper</groupId>
+								<artifactId>modelmapper</artifactId>
+								<version>${modelmapper.version}</version>
+						</dependency>
+				</dependencies>
+		</dependencyManagement>
 
 </project>
