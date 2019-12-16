@@ -23,8 +23,8 @@
 		<properties>
 				<java.version>1.8</java.version>
 				<hui-boot-common.version>0.0.1-SNAPSHOT</hui-boot-common.version>
-				<swagger.version>2.8.0</swagger.version>
-				<mybatisplus-boot-starter.version>3.1.0</mybatisplus-boot-starter.version>
+				<swagger.version>2.9.2</swagger.version>
+				<mybatisplus-boot-starter.version>3.3.0</mybatisplus-boot-starter.version>
 				<jsonwebtoken.version>0.9.1</jsonwebtoken.version>
 				<fastjson.version>1.2.47</fastjson.version>
 				<fastdfs-client-java.version>1.27-RELEASE</fastdfs-client-java.version>

@@ -99,7 +99,7 @@ public class SuperGenerator {
 	 */
 	protected String underlineToCamel(String param) {
 		if (param == null || "".equals(param.trim())) {
-			return "" ;
+			return "";
 		}
 		int len = param.length();
 		StringBuilder sb = new StringBuilder(len);
@@ -134,7 +134,7 @@ public class SuperGenerator {
 	 */
 	protected PackageConfig getPackageConfig() {
 		return new PackageConfig()
-				.setParent("com.project")
+				.setParent("com.hui.project")
 				.setController("web")
 				.setEntity("model.entity.sys")
 				.setMapper("mapper")
@@ -150,36 +150,38 @@ public class SuperGenerator {
 	 */
 	protected StrategyConfig getStrategyConfig(String tableName) {
 		List<TableFill> tableFillList = getTableFills();
-		return new StrategyConfig()
-				.setCapitalMode(false)// 全局大写命名
-				.setTablePrefix("sys_")// 去除前缀
-				.setNaming(NamingStrategy.underline_to_camel)// 表名生成策略
-				//.setInclude(new String[] { "user" }) // 需要生成的表
-				//自定义实体父类
-				.setSuperEntityClass("BaseModel")
-				// 自定义实体，公共字段
-				.setSuperEntityColumns("id", "create_time", "update_time")
-				.setTableFillList(tableFillList)
-				// 自定义 mapper 父类
-				//.setSuperMapperClass("com.hui.project.common.base.BaseMapper")
-				// 自定义 controller 父类
-				.setSuperControllerClass("CrudController")
-				// 自定义 service 实现类父类
-				.setSuperServiceImplClass("BaseServiceImpl")
-				// 自定义 service 接口父类
-				.setSuperServiceClass("BaseService")
-				// 【实体】是否生成字段常量（默认 false）
-				.setEntityColumnConstant(false)
-				// 【实体】是否为构建者模型（默认 false）
-				.setEntityBuilderModel(false)
-				// 【实体】是否为lombok模型（默认 false）<a href="https://projectlombok.org/">document</a>
-				.setEntityLombokModel(true)
-				// Boolean类型字段是否移除is前缀处理
-				.setEntityBooleanColumnRemoveIsPrefix(true)
-				// 逻辑删除字段
-				.setLogicDeleteFieldName("del_flag")
-				.setRestControllerStyle(true)
-				.setInclude(tableName);
+		StrategyConfig strategyConfig = new StrategyConfig();
+
+		strategyConfig.setCapitalMode(false);// 全局大写命名
+		strategyConfig.setTablePrefix("sys_");// 去除前缀
+		strategyConfig.setNaming(NamingStrategy.underline_to_camel);// 表名生成策略
+		//strategyConfig.setInclude(new String[] { "user" }) // 需要生成的表
+		//自定义实体父类
+		strategyConfig.setSuperEntityClass("com.hui.project.common.base.BaseModel");
+		// 自定义实体，公共字段
+		strategyConfig.setSuperEntityColumns("id", "create_time", "update_time");
+		strategyConfig.setTableFillList(tableFillList);
+		// 自定义 mapper 父类
+		//strategyConfig.setSuperMapperClass("com.hui.project.common.base.BaseMapper")
+		// 自定义 controller 父类
+		strategyConfig.setSuperControllerClass("com.hui.project.web.CrudController");
+		// 自定义 service 实现类父类
+		strategyConfig.setSuperServiceImplClass("com.hui.project.common.base.BaseServiceImpl");
+		// 自定义 service 接口父类
+		strategyConfig.setSuperServiceClass("com.hui.project.common.base.BaseService");
+		// 【实体】是否生成字段常量（默认 false）
+		strategyConfig.setEntityColumnConstant(false);
+		// 【实体】是否为构建者模型（默认 false）
+		strategyConfig.setEntityBuilderModel(false);
+		// 【实体】是否为lombok模型（默认 false）<a href="https://projectlombok.org/">document</a>
+		strategyConfig.setEntityLombokModel(true);
+		// Boolean类型字段是否移除is前缀处理
+		strategyConfig.setEntityBooleanColumnRemoveIsPrefix(true);
+		// 逻辑删除字段
+		strategyConfig.setLogicDeleteFieldName("del_flag");
+		strategyConfig.setRestControllerStyle(true);
+		strategyConfig.setInclude(tableName);
+		return strategyConfig;
 	}
 
 	/**
@@ -278,7 +280,7 @@ public class SuperGenerator {
 	 * @return
 	 */
 	protected String getJavaPath() {
-		return getRootPath() + "/src/main/java" ;
+		return getRootPath() + "/src/main/java";
 	}
 
 	/**
@@ -287,7 +289,7 @@ public class SuperGenerator {
 	 * @return
 	 */
 	protected String getResourcePath() {
-		return getRootPath() + "/src/main/resources" ;
+		return getRootPath() + "/src/main/resources";
 	}
 
 	/**
