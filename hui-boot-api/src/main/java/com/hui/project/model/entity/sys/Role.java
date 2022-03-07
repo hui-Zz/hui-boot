@@ -4,8 +4,7 @@ import com.baomidou.mybatisplus.annotation.FieldFill;
 import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableLogic;
 import com.baomidou.mybatisplus.annotation.TableName;
-import com.hui.project.common.base.BaseModel;
-
+import com.hui.project.common.base.BaseTimeIdModel;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
@@ -24,7 +23,7 @@ import lombok.experimental.Accessors;
 @Accessors(chain = true)
 @TableName("sys_role")
 @ApiModel(value = "Role对象", description = "角色表")
-public class Role extends BaseModel {
+public class Role extends BaseTimeIdModel {
 
 	private static final long serialVersionUID = 1L;
 
