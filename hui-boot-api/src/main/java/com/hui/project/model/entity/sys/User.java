@@ -1,18 +1,17 @@
 package com.hui.project.model.entity.sys;
 
-import java.time.LocalDateTime;
-
 import com.baomidou.mybatisplus.annotation.FieldFill;
 import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableLogic;
 import com.baomidou.mybatisplus.annotation.TableName;
-import com.hui.project.common.base.BaseModel;
-
+import com.hui.project.common.base.BaseTimeIdModel;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.experimental.Accessors;
+
+import java.time.LocalDateTime;
 
 /**
  * <p>
@@ -26,7 +25,7 @@ import lombok.experimental.Accessors;
 @Accessors(chain = true)
 @TableName("sys_user")
 @ApiModel(value = "User对象", description = "用户表")
-public class User extends BaseModel {
+public class User extends BaseTimeIdModel {
 
 	private static final long serialVersionUID = 1L;
 
