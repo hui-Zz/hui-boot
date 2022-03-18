@@ -21,31 +21,31 @@ import java.time.LocalDateTime;
 @Accessors(chain = true)
 public class BaseTimeModel extends BaseConvertModel {
 
-	@ApiModelProperty(value = "创建时间")
-	@DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
-	@JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
-	private LocalDateTime createTime;
+    @ApiModelProperty(value = "创建时间")
+    @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
+    private LocalDateTime createTime;
 
-	@ApiModelProperty(value = "修改时间")
-	@DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
-	@JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
-	private LocalDateTime updateTime;
+    @ApiModelProperty(value = "修改时间")
+    @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
+    private LocalDateTime updateTime;
 
-	//private Long createTimeStamp;
-	//private Long updateTimeStamp;
-	//
-	//public void setCreateTime(LocalDateTime createTime) {
-	//	this.createTime = createTime;
-	//	if (createTime != null) {
-	//		this.createTimeStamp = createTime.atZone(ZoneId.systemDefault()).toInstant().toEpochMilli();
-	//	}
-	//}
-	//
-	//public void setUpdateTime(LocalDateTime updateTime) {
-	//	this.updateTime = updateTime;
-	//	if (updateTime != null) {
-	//		this.updateTimeStamp = updateTime.atZone(ZoneId.systemDefault()).toInstant().toEpochMilli();
-	//	}
-	//}
+    //private Long createTimeStamp;
+    //private Long updateTimeStamp;
+    //
+    //public void setCreateTime(LocalDateTime createTime) {
+    //	this.createTime = createTime;
+    //	if (createTime != null) {
+    //		this.createTimeStamp = createTime.atZone(ZoneId.systemDefault()).toInstant().toEpochMilli();
+    //	}
+    //}
+    //
+    //public void setUpdateTime(LocalDateTime updateTime) {
+    //	this.updateTime = updateTime;
+    //	if (updateTime != null) {
+    //		this.updateTimeStamp = updateTime.atZone(ZoneId.systemDefault()).toInstant().toEpochMilli();
+    //	}
+    //}
 
 }

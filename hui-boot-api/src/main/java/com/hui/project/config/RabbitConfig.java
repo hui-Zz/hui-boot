@@ -8,9 +8,9 @@ import org.springframework.context.annotation.Profile;
 @Configuration
 @Profile({"test"})
 public class RabbitConfig {
-	@Bean
-	public Queue Queue() {
-		Queue queue = new Queue("hello");
-		return queue;
-	}
+    @Bean
+    public Queue Queue() {
+        Queue queue = new Queue("hello");
+        return queue;
+    }
 }

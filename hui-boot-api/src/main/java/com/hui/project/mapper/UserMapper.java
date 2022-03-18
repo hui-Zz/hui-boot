@@ -1,9 +1,8 @@
 package com.hui.project.mapper;
 
-import org.apache.ibatis.annotations.Mapper;
-
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import com.hui.project.model.entity.sys.User;
+import org.apache.ibatis.annotations.Mapper;
 
 /**
  * <p>

@@ -17,27 +17,27 @@ import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 @AutoConfigureMockMvc
 public class BaseControllerTest {
 
-	@Autowired
-	protected MockMvc mockMvc;
+    @Autowired
+    protected MockMvc mockMvc;
 
-	//@Before
-	//public void setUp() throws Exception {
-	//	mockMvc = MockMvcBuilders.standaloneSetup(new UserController()).build();
-	//}
+    //@Before
+    //public void setUp() throws Exception {
+    //	mockMvc = MockMvcBuilders.standaloneSetup(new UserController()).build();
+    //}
 
-	//验证controller是否正常响应并打印返回结果
-	@Test
-	public void test() {
-		System.out.println("test");
-	}
+    //验证controller是否正常响应并打印返回结果
+    @Test
+    public void test() {
+        System.out.println("test");
+    }
 
-	//验证controller是否正常响应并判断返回结果是否正确
-	//@Test
-	public void get(String url) throws Exception {
-		mockMvc.perform(MockMvcRequestBuilders.get(url).accept(MediaType.APPLICATION_JSON))
-				.andExpect(MockMvcResultMatchers.status().isOk())
-				.andDo(MockMvcResultHandlers.print())
-				.andReturn();
-	}
+    //验证controller是否正常响应并判断返回结果是否正确
+    //@Test
+    public void get(String url) throws Exception {
+        mockMvc.perform(MockMvcRequestBuilders.get(url).accept(MediaType.APPLICATION_JSON))
+                .andExpect(MockMvcResultMatchers.status().isOk())
+                .andDo(MockMvcResultHandlers.print())
+                .andReturn();
+    }
 
 }

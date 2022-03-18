@@ -1,20 +1,17 @@
 package com.hui.project.web.controller;
 
-import java.util.UUID;
-
-import javax.servlet.http.HttpSession;
-
+import com.hui.project.model.entity.sys.User;
+import com.hui.project.service.UserService;
+import com.hui.project.web.CrudController;
+import io.swagger.annotations.Api;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.hui.project.model.entity.sys.User;
-import com.hui.project.service.UserService;
-import com.hui.project.web.CrudController;
-
-import io.swagger.annotations.Api;
+import javax.servlet.http.HttpSession;
+import java.util.UUID;
 
 /**
  * <p>
@@ -29,22 +26,22 @@ import io.swagger.annotations.Api;
 @Validated
 public class UserController extends CrudController<User, Long> {
 
-	@Autowired
-	private UserService userService;
+    @Autowired
+    private UserService userService;
 
-	@Override
-	protected UserService getService() {
-		return userService;
-	}
+    @Override
+    protected UserService getService() {
+        return userService;
+    }
 
-	@RequestMapping("/uid")
-	String uid(HttpSession session) {
-		UUID uid = (UUID) session.getAttribute("uid");
-		if (uid == null) {
-			uid = UUID.randomUUID();
-		}
-		session.setAttribute("uid", uid);
-		return session.getId();
-	}
+    @RequestMapping("/uid")
+    String uid(HttpSession session) {
+        UUID uid = (UUID) session.getAttribute("uid");
+        if (uid == null) {
+            uid = UUID.randomUUID();
+        }
+        session.setAttribute("uid", uid);
+        return session.getId();
+    }
 
 }

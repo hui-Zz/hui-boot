@@ -17,7 +17,7 @@ import lombok.NoArgsConstructor;
 @EqualsAndHashCode(callSuper = true)
 public class BasePageModel extends BaseConvertModel {
 
-	@ApiModelProperty(value = "分页对象", notes = "分页对象")
-	protected PageModel page;
+    @ApiModelProperty(value = "分页对象", notes = "分页对象")
+    protected PageModel page;
 
 }

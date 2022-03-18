@@ -20,7 +20,7 @@ mybatis-plus:
   # 如果是放在resource目录 classpath:/mapper/*Mapper.xml
   mapper-locations: classpath:/mapper/*Mapper.xml
   #实体扫描，多个package用逗号或者分号分隔
-  type-aliases-package: com.project.entity
+  type-aliases-package: com.hui.project.model.entity
   global-config:
     db-config:
       field-strategy: not_empty

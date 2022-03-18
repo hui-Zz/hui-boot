@@ -6,7 +6,6 @@ import lombok.NoArgsConstructor;
 
 import javax.validation.constraints.NotNull;
 
-;
 
 /**
  * <p>
@@ -20,7 +19,7 @@ import javax.validation.constraints.NotNull;
 @EqualsAndHashCode(callSuper = true)
 public class BaseIdModel extends BaseConvertModel {
 
-	@NotNull(groups = {Update.class, Describe.class, Delete.class}, message = "id不能为空")
-	protected Long id;
+    @NotNull(groups = {Update.class, Describe.class, Delete.class}, message = "id不能为空")
+    protected Long id;
 
 }

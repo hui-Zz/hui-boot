@@ -12,21 +12,21 @@ import org.springframework.test.context.junit4.SpringRunner;
 // 必须激活对应的项目配置
 @ActiveProfiles("test")
 public class RabbitMqHelloTest {
-	@Autowired
-	private HelloSender helloSender;
-	@Autowired
-	private HelloSender2 helloSender2;
+    @Autowired
+    private HelloSender helloSender;
+    @Autowired
+    private HelloSender2 helloSender2;
 
-	@Test
-	public void hello() throws Exception {
-		helloSender.send(666);
-	}
+    @Test
+    public void hello() throws Exception {
+        helloSender.send(666);
+    }
 
-	@Test
-	public void oneToMany() throws Exception {
-		for (int i = 0; i < 100; i++) {
-			helloSender.send(i);
-			helloSender2.send(i);
-		}
-	}
+    @Test
+    public void oneToMany() throws Exception {
+        for (int i = 0; i < 100; i++) {
+            helloSender.send(i);
+            helloSender2.send(i);
+        }
+    }
 }

@@ -1,6 +1,7 @@
 # hui-boot
 
 ## framework
+
 - SpringBoot
 - Mybatis
   - Mybatis Plus
@@ -11,6 +12,7 @@
 - FastJson
 
 ## data
+
 - redis
 - rabbitMQ
 - fastDFS
