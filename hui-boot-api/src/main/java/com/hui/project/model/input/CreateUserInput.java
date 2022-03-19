@@ -1,12 +1,6 @@
-package com.hui.project.model.entity.sys;
+package com.hui.project.model.input;
 
-import com.baomidou.mybatisplus.annotation.FieldFill;
-import com.baomidou.mybatisplus.annotation.IdType;
-import com.baomidou.mybatisplus.annotation.TableField;
-import com.baomidou.mybatisplus.annotation.TableId;
-import com.baomidou.mybatisplus.annotation.TableLogic;
-import com.baomidou.mybatisplus.annotation.TableName;
-import com.hui.project.common.base.BaseTimeIdModel;
+import com.hui.project.common.base.BaseConvertModel;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
@@ -17,7 +11,7 @@ import java.time.LocalDateTime;
 
 /**
  * <p>
- * 用户信息表
+ * 用户信息表输入
  * </p>
  *
  * @author hui
@@ -25,14 +19,13 @@ import java.time.LocalDateTime;
 @Data
 @EqualsAndHashCode(callSuper = true)
 @Accessors(chain = true)
-@TableName("sys_user")
-@ApiModel(value = "SysRole对象", description = "用户信息表")
-public class User extends BaseTimeIdModel {
+@ApiModel(value = "SysRole创建输入对象", description = "用户信息表")
+public class CreateUserInput extends BaseConvertModel {
 
     private static final long serialVersionUID = 1L;
 
     @ApiModelProperty(value = "用户ID")
-    @TableId(value = "user_id", type = IdType.AUTO)
+
     private Long userId;
 
     @ApiModelProperty(value = "部门ID")
@@ -66,7 +59,6 @@ public class User extends BaseTimeIdModel {
     private String status;
 
     @ApiModelProperty(value = "删除标志（0代表存在 2代表删除）")
-    @TableLogic
     private String delFlag;
 
     @ApiModelProperty(value = "最后登录IP")
@@ -76,11 +68,9 @@ public class User extends BaseTimeIdModel {
     private LocalDateTime loginDate;
 
     @ApiModelProperty(value = "创建者")
-    @TableField(fill = FieldFill.INSERT)
     private String createBy;
 
     @ApiModelProperty(value = "更新者")
-    @TableField(fill = FieldFill.INSERT_UPDATE)
     private String updateBy;
 
     @ApiModelProperty(value = "备注")

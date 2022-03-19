@@ -1,15 +1,14 @@
 package ${package.Controller};
 
+import cn.hutool.core.util.*;
+import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.util.Assert;
 import org.springframework.validation.annotation.Validated;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 #if(${restControllerStyle})
 import org.springframework.web.bind.annotation.RestController;
 #else
@@ -22,73 +21,72 @@ import ${superControllerClassPackage};
 import ${package.Entity}.${entity};
 import ${package.Service}.${table.serviceName};
 
+import com.hui.project.model.input.*;
+import com.hui.project.model.entity.*;
+import com.hui.project.model.vo.*;
+import com.hui.project.common.page.*;
+import com.hui.project.common.base.Result;
+import com.hui.project.common.base.ResultGenerator;
+
+import java.util.List;
+
 /**
- * <p>
  * $!{table.comment} 前端控制器
- * </p>
  *
  * @author ${author}
  */
-@Api(tags = {"${entity}"}, description = "${table.comment}相关接口")
-#if(${restControllerStyle})
-@RestController
-#else
-@Controller
-#end
-@RequestMapping(value = "#if(${package.ModuleName})/${package.ModuleName}#end/#if(${controllerMappingHyphenStyle})${controllerMappingHyphen}#else${table.entityPath}#end", produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
-#if(${superControllerClass})
+@Api(tags = {"${table.comment}"})
+	#if(${restControllerStyle})
+	@RestController
+	#else
+	@Controller
+	#end
+@RequestMapping(value = "#if(${package.ModuleName})/${package.ModuleName}#end/api/#if(${controllerMappingHyphenStyle})${controllerMappingHyphen}#else${table.entityPath}#end", produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
+
 @Validated
 public class ${table.controllerName} extends ${superControllerClass} {
 
 @Autowired
 private ${table.serviceName} ${table.entityPath}Service;
 
-@ApiOperation("查询${cfg.tableComment}")
-@PostMapping("/describe${cfg.obj}")
-public Object describe${cfg.obj}(@RequestParam("id") Long id){
-	${entity} ${table.entityPath} = ${table.entityPath}Service.getById(id);
-		return Optional.ofNullable(${table.entityPath})
-		.map(e-> ${table.entityPath}.convert(Describe${cfg.tableNamePascal}Output.class))
-		.orElse(null);
+@ApiOperation("查询$!{table.comment}")
+@GetMapping("/info")
+public Result info(@RequestParam String id){
+		return ResultGenerator.getSuccessResult(${table.entityPath}Service.getById(id));
 		}
 
-@ApiOperation("${cfg.tableComment}列表分页")
-@PostMapping("/describe${cfg.obj}Page")
-public Object describe${cfg.obj}Page(Page<${entity}> page){
-		return ${table.entityPath}Service.page(page);
+@ApiOperation("$!{table.comment}列表分页")
+@GetMapping("/list")
+public Result page(Describe${entity}PageVo describe${entity}PageVo){
+		startPage();
+		startOrderBy();
+		List<${entity}> list= ${table.entityPath}Service.list(new LambdaQueryWrapper<${entity}>());
+		return ResultGenerator.getSuccessResult(getDataTable(list));
 		}
 
-@ApiOperation("添加${cfg.tableComment}")
-@PostMapping("/create${cfg.obj}")
-public boolean create${cfg.obj}(@RequestBody @Validated Create${cfg.tableNamePascal}Input create${cfg.tableNameCamel}Input){
-	${entity} ${table.entityPath} =create${cfg.tableNameCamel}Input.convert(${entity}.class);
-		return Optional.ofNullable(${table.entityPath})
-		.map(e-> ${table.entityPath}Service.save(${table.entityPath}))
-		.orElse(false);
+@ApiOperation("添加$!{table.comment}")
+@PostMapping("/add")
+public Result add(@RequestBody @Validated Create${entity}Input create${entity}Input){
+	${entity} ${table.entityPath} =create${entity}Input.convert(${entity}.class);
+		return ResultGenerator.getSuccessResult(${table.entityPath}Service.save(${table.entityPath}));
 		}
 
-@ApiOperation("修改${cfg.tableComment}")
-@PostMapping("/update${cfg.obj}")
-public boolean update${cfg.obj}(@RequestBody @Validated(Update${cfg.tableNamePascal}Input.Update.class) Update${cfg.tableNamePascal}Input update${cfg.tableNameCamel}Input){
-	${entity} ${table.entityPath} =update${cfg.tableNameCamel}Input.convert(${entity}.class);
+
+@ApiOperation("修改$!{table.comment}")
+@PostMapping("/edit")
+public Result edit(@RequestBody @Validated(Update${entity}Input.Update.class) Update${entity}Input update${entity}Input){
+	${entity} ${table.entityPath} =update${entity}Input.convert(${entity}.class);
 	${entity} old= ${table.entityPath}Service.getById(${table.entityPath}.getId());
 		Assert.notNull(old,"要修改的数据不存在！");
-		return ${table.entityPath}Service.updateById(${table.entityPath});
-		}
-
-@ApiOperation("删除${cfg.tableComment}")
-@PostMapping("/delete${cfg.obj}")
-public boolean delete${cfg.obj}(@RequestParam("id") Long id){
-		return ${table.entityPath}Service.removeById(id);
-		}
-
-@ApiOperation("批量删除${cfg.tableComment}")
-@PostMapping("/batchDelete${cfg.obj}")
-public boolean batchDelete${cfg.obj}(@RequestParam("ids") String ids) {
-		return ${table.entityPath}Service.removeByIds(Arrays.asList(ids.split(",")));
+		return ResultGenerator.getSuccessResult(${table.entityPath}Service.updateById(${table.entityPath}));
 		}
 
 
-#end
+@ApiOperation("删除$!{table.comment}")
+@PostMapping("/delete")
+public Result delete(@RequestParam String id){
+		return ResultGenerator.getSuccessResult(${table.entityPath}Service.removeById(id));
+		}
 
-}
+
+		}

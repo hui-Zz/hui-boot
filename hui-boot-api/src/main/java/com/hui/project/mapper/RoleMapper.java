@@ -6,7 +6,7 @@ import org.apache.ibatis.annotations.Mapper;
 
 /**
  * <p>
- * 角色表 Mapper 接口
+ * 角色信息表 Mapper 接口
  * </p>
  *
  * @author hui

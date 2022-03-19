@@ -35,7 +35,7 @@ public class RedisConfigTest {
     public void testObj() throws Exception {
         User user = new User();
         user.setId(11L);
-        user.setName("aa");
+//        user.setName("aa");
         user.setPassword("123");
         ValueOperations<String, User> operations = redisTemplate.opsForValue();
         operations.set("com.neox", user);

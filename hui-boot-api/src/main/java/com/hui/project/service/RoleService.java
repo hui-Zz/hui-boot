@@ -5,7 +5,7 @@ import com.hui.project.model.entity.sys.Role;
 
 /**
  * <p>
- * 角色表 服务类
+ * 角色信息表 服务类
  * </p>
  *
  * @author hui

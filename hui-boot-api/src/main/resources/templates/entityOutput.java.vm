@@ -1,3 +1,4 @@
+
 #foreach($pkg in ${table.importPackages})
 import ${pkg};
 #end
@@ -20,22 +21,22 @@ import lombok.experimental.Accessors;
  */
 #if(${entityLombokModel})
 @Data
-	#if(${superEntityClass})
-	@EqualsAndHashCode(callSuper = true)
-	#else
-	@EqualsAndHashCode(callSuper = false)
-	#end
+#if(${superEntityClass})
+@EqualsAndHashCode(callSuper = true)
+#else
+@EqualsAndHashCode(callSuper = false)
+#end
 @Accessors(chain = true)
 #end
 #if(${swagger2})
-@ApiModel(value = "${cfg.tableNamePascal}输出对象", description = "$!{table.comment}")
+@ApiModel(value = "${entity}输出对象", description = "$!{table.comment}")
 #end
 #if(${superEntityClass})
-public class Describe${cfg.tableNamePascal}Output extends ${superEntityClass}#if(${activeRecord})<${cfg.tableNamePascal}Entity>#end {
+public class Describe${entity}Output extends ${superEntityClass}#if(${activeRecord})<${entity}>#end {
 #elseif(${activeRecord})
-public class Describe${cfg.tableNamePascal}Output extends Model<${entity}> {
+public class Describe${entity}Output extends Model<${entity}> {
 #else
-public class Describe${cfg.tableNamePascal}Output implements Serializable {
+public class Describe${entity}Output implements Serializable {
 #end
 
 	private static final long serialVersionUID = 1L;

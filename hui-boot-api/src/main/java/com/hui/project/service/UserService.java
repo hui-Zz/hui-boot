@@ -5,7 +5,7 @@ import com.hui.project.model.entity.sys.User;
 
 /**
  * <p>
- * 用户表 服务类
+ * 用户信息表 服务类
  * </p>
  *
  * @author hui

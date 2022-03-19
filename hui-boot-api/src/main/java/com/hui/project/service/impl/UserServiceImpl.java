@@ -8,7 +8,7 @@ import org.springframework.stereotype.Service;
 
 /**
  * <p>
- * 用户表 服务实现类
+ * 用户信息表 服务实现类
  * </p>
  *
  * @author hui
