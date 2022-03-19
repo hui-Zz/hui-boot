@@ -10,6 +10,8 @@
 - Velocity
 - lombok
 - FastJson
+- hutool
+- pagehelper
 
 ## data
 

@@ -219,7 +219,7 @@ public class MysqlGeneratorTest {
         // 自定义 mapper 父类
         //strategyConfig.setSuperMapperClass("com.hui.project.common.base.BaseMapper")
         // 自定义 controller 父类
-        strategyConfig.setSuperControllerClass("com.hui.project.web.BaseController");
+        strategyConfig.setSuperControllerClass("com.hui.project.common.base.BaseController");
         // 自定义 service 实现类父类
         strategyConfig.setSuperServiceImplClass("com.hui.project.common.base.BaseServiceImpl");
         // 自定义 service 接口父类
@@ -257,28 +257,28 @@ public class MysqlGeneratorTest {
                 // 自定义输出文件目录
                 @Override
                 public String outputFile(TableInfo tableInfo) {
-                    return POJOCreateDir + "/input/Create" + underlineToPascal(tableInfo.getName()) + "Input.java";
+                    return POJOCreateDir + "/input/Create" + underlineToPascal(tableInfo.getEntityName()) + "Input.java";
                 }
             });
             focList.add(new FileOutConfig("/templates/entityUpdateInput.java.vm") {
                 // 自定义输出文件目录
                 @Override
                 public String outputFile(TableInfo tableInfo) {
-                    return POJOCreateDir + "/input/Update" + underlineToPascal(tableInfo.getName()) + "Input.java";
+                    return POJOCreateDir + "/input/Update" + underlineToPascal(tableInfo.getEntityName()) + "Input.java";
                 }
             });
             focList.add(new FileOutConfig("/templates/entityPageInput.java.vm") {
                 // 自定义输出文件目录
                 @Override
                 public String outputFile(TableInfo tableInfo) {
-                    return POJOCreateDir + "/vo/Describe" + underlineToPascal(tableInfo.getName()) + "PageVo.java";
+                    return POJOCreateDir + "/vo/Describe" + underlineToPascal(tableInfo.getEntityName()) + "PageVo.java";
                 }
             });
 //			focList.add(new FileOutConfig("/templates/entityOutput.java.vm") {
 //				// 自定义输出文件目录
 //				@Override
 //				public String outputFile(TableInfo tableInfo) {
-//					return POJOCreateDir + "/Describe" + underlineToPascal(tableInfo.getName()) + "Output.java";
+//					return POJOCreateDir + "/Describe" + underlineToPascal(tableInfo.getEntityName()) + "Output.java";
 //				}
 //			});
         }

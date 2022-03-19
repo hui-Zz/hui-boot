@@ -1,12 +1,12 @@
 package ${package.Controller};
 
 import cn.hutool.core.util.*;
+import cn.hutool.core.lang.Assert;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
-import org.springframework.util.Assert;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 #if(${restControllerStyle})
@@ -36,57 +36,57 @@ import java.util.List;
  * @author ${author}
  */
 @Api(tags = {"${table.comment}"})
-	#if(${restControllerStyle})
-	@RestController
-	#else
-	@Controller
-	#end
+#if(${restControllerStyle})
+@RestController
+#else
+@Controller
+#end
 @RequestMapping(value = "#if(${package.ModuleName})/${package.ModuleName}#end/api/#if(${controllerMappingHyphenStyle})${controllerMappingHyphen}#else${table.entityPath}#end", produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
 
 @Validated
 public class ${table.controllerName} extends ${superControllerClass} {
 
-@Autowired
-private ${table.serviceName} ${table.entityPath}Service;
+    @Autowired
+    private ${table.serviceName} ${table.entityPath}Service;
 
-@ApiOperation("查询$!{table.comment}")
-@GetMapping("/info")
-public Result info(@RequestParam String id){
-		return ResultGenerator.getSuccessResult(${table.entityPath}Service.getById(id));
-		}
+    @ApiOperation("查询$!{table.comment}")
+    @GetMapping("/info")
+    public Result info(@RequestParam String id) {
+        return ResultGenerator.getSuccessResult(${table.entityPath}Service.getById(id));
+    }
 
-@ApiOperation("$!{table.comment}列表分页")
-@GetMapping("/list")
-public Result page(Describe${entity}PageVo describe${entity}PageVo){
-		startPage();
-		startOrderBy();
-		List<${entity}> list= ${table.entityPath}Service.list(new LambdaQueryWrapper<${entity}>());
-		return ResultGenerator.getSuccessResult(getDataTable(list));
-		}
+    @ApiOperation("$!{table.comment}列表分页")
+    @GetMapping("/list")
+    public Result page(Describe${entity}PageVo describe${entity}PageVo) {
+        startPage();
+        startOrderBy();
+        List<${entity}> list = ${table.entityPath}Service.list(new LambdaQueryWrapper<${entity}>());
+        return ResultGenerator.getSuccessResult(getDataTable(list));
+    }
 
-@ApiOperation("添加$!{table.comment}")
-@PostMapping("/add")
-public Result add(@RequestBody @Validated Create${entity}Input create${entity}Input){
-	${entity} ${table.entityPath} =create${entity}Input.convert(${entity}.class);
-		return ResultGenerator.getSuccessResult(${table.entityPath}Service.save(${table.entityPath}));
-		}
-
-
-@ApiOperation("修改$!{table.comment}")
-@PostMapping("/edit")
-public Result edit(@RequestBody @Validated(Update${entity}Input.Update.class) Update${entity}Input update${entity}Input){
-	${entity} ${table.entityPath} =update${entity}Input.convert(${entity}.class);
-	${entity} old= ${table.entityPath}Service.getById(${table.entityPath}.getId());
-		Assert.notNull(old,"要修改的数据不存在！");
-		return ResultGenerator.getSuccessResult(${table.entityPath}Service.updateById(${table.entityPath}));
-		}
+    @ApiOperation("添加$!{table.comment}")
+    @PostMapping("/add")
+    public Result add(@RequestBody @Validated Create${entity}Input create${entity}Input) {
+        ${entity} ${table.entityPath} = create${entity}Input.convert(${entity}.class);
+        return ResultGenerator.getSuccessResult(${table.entityPath}Service.save(${table.entityPath}));
+    }
 
 
-@ApiOperation("删除$!{table.comment}")
-@PostMapping("/delete")
-public Result delete(@RequestParam String id){
-		return ResultGenerator.getSuccessResult(${table.entityPath}Service.removeById(id));
-		}
+    @ApiOperation("修改$!{table.comment}")
+    @PostMapping("/edit")
+    public Result edit(@RequestBody @Validated(Update${entity}Input.Update.class) Update${entity}Input update${entity}Input) {
+        ${entity} ${table.entityPath} = update${entity}Input.convert(${entity}.class);
+        ${entity} old = ${table.entityPath}Service.getById(${table.entityPath}.getId());
+        Assert.notNull(old, "要修改的数据不存在！");
+        return ResultGenerator.getSuccessResult(${table.entityPath}Service.updateById(${table.entityPath}));
+    }
 
 
-		}
+    @ApiOperation("删除$!{table.comment}")
+    @PostMapping("/delete")
+    public Result delete(@RequestParam String id) {
+        return ResultGenerator.getSuccessResult(${table.entityPath}Service.removeById(id));
+    }
+
+
+}

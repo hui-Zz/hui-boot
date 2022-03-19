@@ -25,7 +25,6 @@ public class UpdateUserInput extends BaseTimeIdModel {
     private static final long serialVersionUID = 1L;
 
     @ApiModelProperty(value = "用户ID")
-
     private Long userId;
 
     @ApiModelProperty(value = "部门ID")

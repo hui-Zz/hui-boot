@@ -25,7 +25,6 @@ public class CreateUserInput extends BaseConvertModel {
     private static final long serialVersionUID = 1L;
 
     @ApiModelProperty(value = "用户ID")
-
     private Long userId;
 
     @ApiModelProperty(value = "部门ID")
