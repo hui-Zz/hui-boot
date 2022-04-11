@@ -35,11 +35,11 @@ import javax.validation.constraints.*;
 @ApiModel(value = "${entity}分页输入对象", description = "$!{table.comment}")
 #end
 #if(${superEntityClass})
-public class Describe${entity}PageVo extends PageDomain#if(${activeRecord})<${entity}>#end {
+public class ${entity}PageVo extends PageDomain#if(${activeRecord})<${entity}>#end {
 #elseif(${activeRecord})
-public class Describe${entity}PageVo extends Model<${entity}> {
+public class ${entity}PageVo extends Model<${entity}> {
 #else
-public class Describe${entity}PageVo implements Serializable {
+public class ${entity}PageVo implements Serializable {
 #end
 
     private static final long serialVersionUID = 1L;

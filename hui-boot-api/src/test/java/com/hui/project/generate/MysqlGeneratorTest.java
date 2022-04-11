@@ -159,7 +159,7 @@ public class MysqlGeneratorTest {
                 .setKotlin(false) //是否生成 kotlin 代码
                 .setOpen(false)
                 .setAuthor("hui") //作者
-                .setSwagger2(true) // 开启 swagger2 模式
+                .setSwagger2(false) // 开启 swagger2 模式
                 //自定义文件命名，注意 %s 会自动填充表实体属性！
                 .setEntityName("%s")
                 .setControllerName("%sController")
@@ -271,14 +271,14 @@ public class MysqlGeneratorTest {
                 // 自定义输出文件目录
                 @Override
                 public String outputFile(TableInfo tableInfo) {
-                    return POJOCreateDir + "/vo/Describe" + underlineToPascal(tableInfo.getEntityName()) + "PageVo.java";
+                    return POJOCreateDir + "/vo/" + underlineToPascal(tableInfo.getEntityName()) + "PageVo.java";
                 }
             });
 //			focList.add(new FileOutConfig("/templates/entityOutput.java.vm") {
 //				// 自定义输出文件目录
 //				@Override
 //				public String outputFile(TableInfo tableInfo) {
-//					return POJOCreateDir + "/Describe" + underlineToPascal(tableInfo.getEntityName()) + "Output.java";
+//					return POJOCreateDir + "/" + underlineToPascal(tableInfo.getEntityName()) + "Output.java";
 //				}
 //			});
         }

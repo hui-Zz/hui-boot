@@ -8,7 +8,7 @@ import com.hui.project.common.base.ResultGenerator;
 import com.hui.project.model.entity.sys.User;
 import com.hui.project.model.input.CreateUserInput;
 import com.hui.project.model.input.UpdateUserInput;
-import com.hui.project.model.vo.DescribeUserPageVo;
+import com.hui.project.model.vo.UserPageVo;
 import com.hui.project.service.UserService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -47,7 +47,7 @@ public class UserController extends BaseController {
 
     @ApiOperation("用户信息表列表分页")
     @GetMapping("/list")
-    public Result page(DescribeUserPageVo describeUserPageVo) {
+    public Result page(UserPageVo vo) {
         startPage();
         startOrderBy();
         List<User> list = userService.list(new LambdaQueryWrapper<User>());
@@ -56,16 +56,16 @@ public class UserController extends BaseController {
 
     @ApiOperation("添加用户信息表")
     @PostMapping("/add")
-    public Result add(@RequestBody @Validated CreateUserInput createUserInput) {
-        User user = createUserInput.convert(User.class);
+    public Result add(@RequestBody @Validated CreateUserInput input) {
+        User user = input.convert(User.class);
         return ResultGenerator.getSuccessResult(userService.save(user));
     }
 
 
     @ApiOperation("修改用户信息表")
     @PostMapping("/edit")
-    public Result edit(@RequestBody @Validated(UpdateUserInput.Update.class) UpdateUserInput updateUserInput) {
-        User user = updateUserInput.convert(User.class);
+    public Result edit(@RequestBody @Validated(UpdateUserInput.Update.class) UpdateUserInput input) {
+        User user = input.convert(User.class);
         User old = userService.getById(user.getId());
         Assert.notNull(old, "要修改的数据不存在！");
         return ResultGenerator.getSuccessResult(userService.updateById(user));

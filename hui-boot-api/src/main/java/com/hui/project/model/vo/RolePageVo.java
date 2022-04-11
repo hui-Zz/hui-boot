@@ -18,7 +18,7 @@ import lombok.experimental.Accessors;
 @EqualsAndHashCode(callSuper = true)
 @Accessors(chain = true)
 @ApiModel(value = "Role分页输入对象", description = "角色信息表")
-public class DescribeRolePageVo extends PageDomain {
+public class RolePageVo extends PageDomain {
 
     private static final long serialVersionUID = 1L;
 

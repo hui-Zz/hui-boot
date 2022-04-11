@@ -20,7 +20,7 @@ import java.time.LocalDateTime;
 @EqualsAndHashCode(callSuper = true)
 @Accessors(chain = true)
 @ApiModel(value = "User分页输入对象", description = "用户信息表")
-public class DescribeUserPageVo extends PageDomain {
+public class UserPageVo extends PageDomain {
 
     private static final long serialVersionUID = 1L;
 
