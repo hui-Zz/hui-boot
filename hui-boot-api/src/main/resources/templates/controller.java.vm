@@ -42,7 +42,6 @@ import java.util.List;
 @Controller
 #end
 @RequestMapping(value = "#if(${package.ModuleName})/${package.ModuleName}#end/api/#if(${controllerMappingHyphenStyle})${controllerMappingHyphen}#else${table.entityPath}#end", produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
-
 @Validated
 public class ${table.controllerName} extends ${superControllerClass} {
 

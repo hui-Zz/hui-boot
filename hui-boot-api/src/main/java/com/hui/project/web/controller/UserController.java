@@ -32,7 +32,6 @@ import java.util.List;
 @Api(tags = {"用户信息表"})
 @RestController
 @RequestMapping(value = "/api/user", produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
-
 @Validated
 public class UserController extends BaseController {
 

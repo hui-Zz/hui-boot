@@ -32,7 +32,6 @@ import java.util.List;
 @Api(tags = {"角色信息表"})
 @RestController
 @RequestMapping(value = "/api/role", produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
-
 @Validated
 public class RoleController extends BaseController {
 
