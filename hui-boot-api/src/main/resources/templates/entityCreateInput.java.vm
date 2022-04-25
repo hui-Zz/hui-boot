@@ -61,7 +61,6 @@ public class ${entity}Input implements Serializable {
 #end
 #end
 #if(${field.keyFlag})
-
 ## 普通字段
 #elseif(${field.fill})
 ## -----   存在字段填充设置   -----

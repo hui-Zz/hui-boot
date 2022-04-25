@@ -17,7 +17,7 @@ import javax.validation.constraints.*;
 
 /**
  * <p>
- * $!{table.comment}输入
+ * $!{table.comment}DTO
  * </p>
  *
  * @author ${author}
