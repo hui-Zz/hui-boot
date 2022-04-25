@@ -1,4 +1,4 @@
-package com.hui.project.model.vo;
+package ${cfg.packageDtoPath};
 
 #foreach($pkg in ${table.importPackages})
 import ${pkg};
@@ -12,7 +12,7 @@ import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.experimental.Accessors;
 #end
-import com.hui.project.common.page.PageDomain;
+import ${cfg.packagePagePath}.PageDomain;
 import javax.validation.constraints.*;
 
 /**
@@ -35,11 +35,11 @@ import javax.validation.constraints.*;
 @ApiModel(value = "${entity}分页输入对象", description = "$!{table.comment}")
 #end
 #if(${superEntityClass})
-public class ${entity}PageVo extends PageDomain#if(${activeRecord})<${entity}>#end {
+public class ${entity}PageDto extends PageDomain#if(${activeRecord})<${entity}>#end {
 #elseif(${activeRecord})
-public class ${entity}PageVo extends Model<${entity}> {
+public class ${entity}PageDto extends Model<${entity}> {
 #else
-public class ${entity}PageVo implements Serializable {
+public class ${entity}PageDto implements Serializable {
 #end
 
     private static final long serialVersionUID = 1L;

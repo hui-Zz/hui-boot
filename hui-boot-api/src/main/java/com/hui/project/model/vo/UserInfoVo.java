@@ -1,9 +1,5 @@
-package com.hui.project.model.entity.sys;
+package com.hui.project.model.vo;
 
-import com.baomidou.mybatisplus.annotation.FieldFill;
-import com.baomidou.mybatisplus.annotation.TableField;
-import com.baomidou.mybatisplus.annotation.TableLogic;
-import com.baomidou.mybatisplus.annotation.TableName;
 import com.hui.project.common.base.BaseTimeIdModel;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
@@ -13,7 +9,7 @@ import java.time.LocalDateTime;
 
 /**
  * <p>
- * 用户信息表
+ * 用户信息表输出
  * </p>
  *
  * @author hui
@@ -21,8 +17,7 @@ import java.time.LocalDateTime;
 @Data
 @EqualsAndHashCode(callSuper = true)
 @Accessors(chain = true)
-@TableName("sys_user")
-public class User extends BaseTimeIdModel {
+public class UserInfoVo extends BaseTimeIdModel {
 
     private static final long serialVersionUID = 1L;
 
@@ -72,20 +67,9 @@ public class User extends BaseTimeIdModel {
     private String avatar;
 
     /**
-     * 密码
-     */
-    private String password;
-
-    /**
      * 帐号状态（0正常 1停用）
      */
     private String status;
-
-    /**
-     * 删除标志（0代表存在 2代表删除）
-     */
-    @TableLogic
-    private String delFlag;
 
     /**
      * 最后登录IP
@@ -100,13 +84,11 @@ public class User extends BaseTimeIdModel {
     /**
      * 创建者
      */
-    @TableField(fill = FieldFill.INSERT)
     private String createBy;
 
     /**
      * 更新者
      */
-    @TableField(fill = FieldFill.INSERT_UPDATE)
     private String updateBy;
 
     /**

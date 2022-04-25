@@ -4,9 +4,6 @@ import com.alibaba.fastjson.JSON;
 import com.hui.project.common.ResponseMessage;
 import com.hui.project.common.base.BaseService;
 import com.hui.project.common.utils.ClassUtils;
-import io.swagger.annotations.ApiImplicitParam;
-import io.swagger.annotations.ApiImplicitParams;
-import io.swagger.annotations.ApiOperation;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -71,10 +68,6 @@ public abstract class CrudController<PO, PK extends Serializable> {
      * @param id 主键
      * @return 请求结果
      */
-    @ApiOperation(value = "查询")
-    @ApiImplicitParams({
-            @ApiImplicitParam(name = "id", value = "ID标识", required = true, paramType = "path", dataType = "long")
-    })
     @Cacheable(value = "key")
     @GetMapping(value = "/{id}")
     public @ResponseBody
@@ -97,7 +90,6 @@ public abstract class CrudController<PO, PK extends Serializable> {
      * @return 被添加数据的主键值
      * @throws javax.validation.ValidationException 验证数据格式错误
      */
-    @ApiOperation(value = "添加")
     @PostMapping()
     @ResponseStatus(HttpStatus.CREATED)
     public ResponseMessage add(PO po) {
@@ -111,10 +103,6 @@ public abstract class CrudController<PO, PK extends Serializable> {
      * @param id 要删除的id标识
      * @return 删除结果
      */
-    @ApiOperation(value = "删除")
-    @ApiImplicitParams({
-            @ApiImplicitParam(name = "id", value = "ID标识", required = true, paramType = "path", dataType = "long")
-    })
     @DeleteMapping(value = "/{id}")
     public ResponseMessage delete(@PathVariable("id") PK id) {
         PO old = getService().getById(id);
@@ -123,10 +111,12 @@ public abstract class CrudController<PO, PK extends Serializable> {
         return ok();
     }
 
-    @ApiOperation(value = "批量删除")
-    @ApiImplicitParams({
-            @ApiImplicitParam(name = "ids", value = "多个ID标识", required = true, paramType = "query", dataType = "long")
-    })
+    /**
+     * 批量删除
+     *
+     * @param ids id
+     * @return {@link ResponseMessage}
+     */
     @PostMapping(value = "/batchDelete")
     public ResponseMessage batchDelete(String ids) {
         getService().removeByIds(Arrays.asList(ids.split(",")));
@@ -140,10 +130,6 @@ public abstract class CrudController<PO, PK extends Serializable> {
      * @param object 要修改的数据
      * @return 请求结果
      */
-    @ApiOperation(value = "修改")
-    @ApiImplicitParams({
-            @ApiImplicitParam(name = "id", value = "ID标识", required = true, paramType = "path", dataType = "long")
-    })
     @PutMapping(value = "/{id}")
     public ResponseMessage update(@PathVariable("id") Integer id, PO object) {
         PO old = getService().getById(id);
@@ -158,10 +144,6 @@ public abstract class CrudController<PO, PK extends Serializable> {
      * @param json 请求修改的数据 json格式
      * @return 被修改数据的条数
      */
-    @ApiOperation(value = "批量修改")
-    @ApiImplicitParams({
-            @ApiImplicitParam(name = "json", value = "json多对象数据", required = true, paramType = "query", dataType = "string")
-    })
     @PutMapping()
     public ResponseMessage update(String json) {
         Boolean success;

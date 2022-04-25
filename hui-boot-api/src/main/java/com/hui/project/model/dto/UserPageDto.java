@@ -1,10 +1,6 @@
-package com.hui.project.model.entity.sys;
+package com.hui.project.model.dto;
 
-import com.baomidou.mybatisplus.annotation.FieldFill;
-import com.baomidou.mybatisplus.annotation.TableField;
-import com.baomidou.mybatisplus.annotation.TableLogic;
-import com.baomidou.mybatisplus.annotation.TableName;
-import com.hui.project.common.base.BaseTimeIdModel;
+import com.hui.project.common.page.PageDomain;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.experimental.Accessors;
@@ -13,7 +9,7 @@ import java.time.LocalDateTime;
 
 /**
  * <p>
- * 用户信息表
+ * 用户信息表DTO
  * </p>
  *
  * @author hui
@@ -21,8 +17,7 @@ import java.time.LocalDateTime;
 @Data
 @EqualsAndHashCode(callSuper = true)
 @Accessors(chain = true)
-@TableName("sys_user")
-public class User extends BaseTimeIdModel {
+public class UserPageDto extends PageDomain {
 
     private static final long serialVersionUID = 1L;
 
@@ -84,7 +79,6 @@ public class User extends BaseTimeIdModel {
     /**
      * 删除标志（0代表存在 2代表删除）
      */
-    @TableLogic
     private String delFlag;
 
     /**
@@ -100,13 +94,11 @@ public class User extends BaseTimeIdModel {
     /**
      * 创建者
      */
-    @TableField(fill = FieldFill.INSERT)
     private String createBy;
 
     /**
      * 更新者
      */
-    @TableField(fill = FieldFill.INSERT_UPDATE)
     private String updateBy;
 
     /**

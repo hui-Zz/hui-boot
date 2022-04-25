@@ -1,19 +1,13 @@
-package com.hui.project.model.entity.sys;
+package com.hui.project.model.dto;
 
-import com.baomidou.mybatisplus.annotation.FieldFill;
-import com.baomidou.mybatisplus.annotation.IdType;
-import com.baomidou.mybatisplus.annotation.TableField;
-import com.baomidou.mybatisplus.annotation.TableId;
-import com.baomidou.mybatisplus.annotation.TableLogic;
-import com.baomidou.mybatisplus.annotation.TableName;
-import com.hui.project.common.base.BaseTimeIdModel;
+import com.hui.project.common.base.BaseConvertModel;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.experimental.Accessors;
 
 /**
  * <p>
- * 角色信息表
+ * 角色信息表输入
  * </p>
  *
  * @author hui
@@ -21,15 +15,13 @@ import lombok.experimental.Accessors;
 @Data
 @EqualsAndHashCode(callSuper = true)
 @Accessors(chain = true)
-@TableName("sys_role")
-public class Role extends BaseTimeIdModel {
+public class RoleInput extends BaseConvertModel {
 
     private static final long serialVersionUID = 1L;
 
     /**
      * 角色ID
      */
-    @TableId(value = "role_id", type = IdType.AUTO)
     private Long roleId;
 
     /**
@@ -70,19 +62,16 @@ public class Role extends BaseTimeIdModel {
     /**
      * 删除标志（0代表存在 2代表删除）
      */
-    @TableLogic
     private String delFlag;
 
     /**
      * 创建者
      */
-    @TableField(fill = FieldFill.INSERT)
     private String createBy;
 
     /**
      * 更新者
      */
-    @TableField(fill = FieldFill.INSERT_UPDATE)
     private String updateBy;
 
     /**

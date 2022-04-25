@@ -56,8 +56,19 @@ import java.util.Objects;
 public class MysqlGeneratorTest {
 
     int flag = 1; // 开关
-    String[] tableNames = new String[]{"sys_user", "sys_role"}; // 多个表生成
+    String[] tableNames = new String[]{
+            "sys_user",
+            "sys_role"
+    }; // 多个表生成
     String outputDir = getJavaPath();  // 输出路径
+    String packagePath = "com.hui.project";  // 输出包路径
+    String packageBasePath = packagePath + ".common.base";
+    String entityPath = "model.entity.sys";
+    String packageEntityPath = packagePath + "." + entityPath;
+    String packageDtoPath = packagePath + ".model.dto";
+    String packageVoPath = packagePath + ".model.vo";
+    String packagePagePath = packagePath + ".common.page";
+    String packageCommonPath = "com.hui.project.common";  // 公共包路径
     boolean POJOFlag = true; // 生成POJO开关
     boolean POJOCreateFlag = true;
     String POJOCreateDir = getRootPath() + "/src/main/java/com/hui/project/model"; // POJO文件路径
@@ -212,18 +223,18 @@ public class MysqlGeneratorTest {
         strategyConfig.setNaming(NamingStrategy.underline_to_camel);// 表名生成策略
         //strategyConfig.setInclude(new String[] { "user" }) // 需要生成的表
         //自定义实体父类
-        strategyConfig.setSuperEntityClass("com.hui.project.common.base.BaseTimeIdModel");
+        strategyConfig.setSuperEntityClass(packageBasePath + ".BaseTimeIdModel");
         // 自定义实体，公共字段
         strategyConfig.setSuperEntityColumns("id", "create_time", "update_time");
         strategyConfig.setTableFillList(tableFillList);
         // 自定义 mapper 父类
-        //strategyConfig.setSuperMapperClass("com.hui.project.common.base.BaseMapper")
+        //strategyConfig.setSuperMapperClass(packageBaseName + ".BaseMapper")
         // 自定义 controller 父类
-        strategyConfig.setSuperControllerClass("com.hui.project.common.base.BaseController");
+        strategyConfig.setSuperControllerClass(packageBasePath + ".BaseController");
         // 自定义 service 实现类父类
-        strategyConfig.setSuperServiceImplClass("com.hui.project.common.base.BaseServiceImpl");
+        strategyConfig.setSuperServiceImplClass(packageBasePath + ".BaseServiceImpl");
         // 自定义 service 接口父类
-        strategyConfig.setSuperServiceClass("com.hui.project.common.base.BaseService");
+        strategyConfig.setSuperServiceClass(packageBasePath + ".BaseService");
         // 【实体】是否生成字段常量（默认 false）
         strategyConfig.setEntityColumnConstant(false);
         // 【实体】是否为构建者模型（默认 false）
@@ -241,9 +252,9 @@ public class MysqlGeneratorTest {
 
     protected PackageConfig getPackageConfig() {
         return new PackageConfig()
-                .setParent("com.hui.project") // 父路径包名
+                .setParent(packagePath) // 父路径包名
                 .setController("web.controller")// Controller路径
-                .setEntity("model.entity.sys") // Entity路径
+                .setEntity(entityPath) // Entity路径
                 .setMapper("mapper") // Mapper路径
                 .setService("service") // Service路径
                 .setServiceImpl("service.impl"); // ServiceImpl路径
@@ -257,21 +268,21 @@ public class MysqlGeneratorTest {
                 // 自定义输出文件目录
                 @Override
                 public String outputFile(TableInfo tableInfo) {
-                    return POJOCreateDir + "/input/Create" + underlineToPascal(tableInfo.getEntityName()) + "Input.java";
+                    return POJOCreateDir + "/dto/" + underlineToPascal(tableInfo.getEntityName()) + "Input.java";
                 }
             });
             focList.add(new FileOutConfig("/templates/entityUpdateInput.java.vm") {
                 // 自定义输出文件目录
                 @Override
                 public String outputFile(TableInfo tableInfo) {
-                    return POJOCreateDir + "/input/Update" + underlineToPascal(tableInfo.getEntityName()) + "Input.java";
+                    return POJOCreateDir + "/dto/" + underlineToPascal(tableInfo.getEntityName()) + "Dto.java";
                 }
             });
             focList.add(new FileOutConfig("/templates/entityPageInput.java.vm") {
                 // 自定义输出文件目录
                 @Override
                 public String outputFile(TableInfo tableInfo) {
-                    return POJOCreateDir + "/vo/" + underlineToPascal(tableInfo.getEntityName()) + "PageVo.java";
+                    return POJOCreateDir + "/dto/" + underlineToPascal(tableInfo.getEntityName()) + "PageDto.java";
                 }
             });
 //			focList.add(new FileOutConfig("/templates/entityOutput.java.vm") {
@@ -294,6 +305,13 @@ public class MysqlGeneratorTest {
                 map.put("tableNamePascal", underlineToPascal(tableName));
                 map.put("objPath", underlineToCamel(modulePath));
                 map.put("obj", underlineToPascal(modulePath));
+                map.put("packagePath", packagePath);
+                map.put("packageBasePath", packageBasePath);
+                map.put("packageEntityPath", packageEntityPath);
+                map.put("packageDtoPath", packageDtoPath);
+                map.put("packageVoPath", packageVoPath);
+                map.put("packagePagePath", packagePagePath);
+                map.put("packageCommonPath", packageCommonPath);
                 this.setMap(map);
             }
         }.setFileOutConfigList(focList);

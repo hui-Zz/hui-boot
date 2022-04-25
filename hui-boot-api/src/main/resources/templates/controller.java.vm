@@ -3,8 +3,6 @@ package ${package.Controller};
 import cn.hutool.core.util.*;
 import cn.hutool.core.lang.Assert;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
-import io.swagger.annotations.Api;
-import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.validation.annotation.Validated;
@@ -21,12 +19,12 @@ import ${superControllerClassPackage};
 import ${package.Entity}.${entity};
 import ${package.Service}.${table.serviceName};
 
-import com.hui.project.model.input.*;
-import com.hui.project.model.entity.*;
-import com.hui.project.model.vo.*;
-import com.hui.project.common.page.*;
-import com.hui.project.common.base.Result;
-import com.hui.project.common.base.ResultGenerator;
+import ${cfg.packageDtoPath}.*;
+import ${cfg.packageEntityPath}.*;
+import ${cfg.packageVoPath}.*;
+import ${cfg.packagePagePath}.*;
+import ${cfg.packageCommonPath}.base.Result;
+import ${cfg.packageCommonPath}.base.ResultGenerator;
 
 import java.util.List;
 
@@ -35,7 +33,6 @@ import java.util.List;
  *
  * @author ${author}
  */
-@Api(tags = {"${table.comment}"})
 #if(${restControllerStyle})
 @RestController
 #else
@@ -60,7 +57,7 @@ public class ${table.controllerName} extends ${superControllerClass} {
     * $!{table.comment}列表分页
     */
     @GetMapping("/list")
-    public Result page(${entity}PageVo vo) {
+    public Result page(${entity}PageDto dto) {
         startPage();
         startOrderBy();
         List<${entity}> list = ${table.entityPath}Service.list(new LambdaQueryWrapper<${entity}>());
@@ -71,7 +68,7 @@ public class ${table.controllerName} extends ${superControllerClass} {
     * 添加$!{table.comment}
     */
     @PostMapping("/add")
-    public Result add(@RequestBody @Validated Create${entity}Input input) {
+    public Result add(@RequestBody @Validated ${entity}Input input) {
         ${entity} ${table.entityPath} = input.convert(${entity}.class);
         return ResultGenerator.getSuccessResult(${table.entityPath}Service.save(${table.entityPath}));
     }
@@ -80,8 +77,8 @@ public class ${table.controllerName} extends ${superControllerClass} {
     * 修改$!{table.comment}
     */
     @PostMapping("/edit")
-    public Result edit(@RequestBody @Validated(Update${entity}Input.Update.class) Update${entity}Input input) {
-        ${entity} ${table.entityPath} = input.convert(${entity}.class);
+    public Result edit(@RequestBody @Validated ${entity}Dto dto) {
+        ${entity} ${table.entityPath} = dto.convert(${entity}.class);
         ${entity} old = ${table.entityPath}Service.getById(${table.entityPath}.getId());
         Assert.notNull(old, "要修改的数据不存在！");
         return ResultGenerator.getSuccessResult(${table.entityPath}Service.updateById(${table.entityPath}));
