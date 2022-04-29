@@ -32,11 +32,11 @@ import lombok.experimental.Accessors;
 @ApiModel(value = "${entity}输出对象", description = "$!{table.comment}")
 #end
 #if(${superEntityClass})
-public class Describe${entity}Output extends ${superEntityClass}#if(${activeRecord})<${entity}>#end {
+public class ${entity}Output extends ${superEntityClass}#if(${activeRecord})<${entity}>#end {
 #elseif(${activeRecord})
-public class Describe${entity}Output extends Model<${entity}> {
+public class ${entity}Output extends Model<${entity}> {
 #else
-public class Describe${entity}Output implements Serializable {
+public class ${entity}Output implements Serializable {
 #end
 
 	private static final long serialVersionUID = 1L;

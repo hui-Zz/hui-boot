@@ -1,6 +1,6 @@
-package com.hui.project.model.input;
+package ${cfg.packageDtoPath};
 
-import com.hui.project.common.base.BaseConvertModel;
+import ${cfg.packageBasePath}.BaseConvertModel;
 #foreach($pkg in ${table.importPackages})
 import ${pkg};
 #end
@@ -35,11 +35,11 @@ import javax.validation.constraints.*;
 @ApiModel(value = "${cfg.tableNamePascal}创建输入对象", description = "$!{table.comment}")
 #end
 #if(${superEntityClass})
-public class Create${entity}Input extends BaseConvertModel#if(${activeRecord})<${entity}>#end {
+public class ${entity}Input extends BaseConvertModel#if(${activeRecord})<${entity}>#end {
 #elseif(${activeRecord})
-public class Create${entity}Input extends Model<${entity}> {
+public class ${entity}Input extends Model<${entity}> {
 #else
-public class Create${entity}Input implements Serializable {
+public class ${entity}Input implements Serializable {
 #end
 
     private static final long serialVersionUID = 1L;
@@ -61,7 +61,6 @@ public class Create${entity}Input implements Serializable {
 #end
 #end
 #if(${field.keyFlag})
-
 ## 普通字段
 #elseif(${field.fill})
 ## -----   存在字段填充设置   -----

@@ -1,4 +1,4 @@
-package com.hui.project.model.input;
+package ${cfg.packageDtoPath};
 
 #foreach($pkg in ${table.importPackages})
 import ${pkg};
@@ -16,7 +16,7 @@ import javax.validation.constraints.*;
 
 /**
  * <p>
- * $!{table.comment}输入
+ * $!{table.comment}DTO
  * </p>
  *
  * @author ${author}
@@ -34,11 +34,11 @@ import javax.validation.constraints.*;
 @ApiModel(value = "${entity}更新输入对象", description = "$!{table.comment}")
 #end
 #if(${superEntityClass})
-public class Update${entity}Input extends ${superEntityClass}#if(${activeRecord})<${entity}>#end {
+public class ${entity}Dto extends ${superEntityClass}#if(${activeRecord})<${entity}>#end {
 #elseif(${activeRecord})
-public class Update${entity}Input extends Model<${entity}> {
+public class ${entity}Dto extends Model<${entity}> {
 #else
-public class Update${entity}Input implements Serializable {
+public class ${entity}Dto implements Serializable {
 #end
 
     private static final long serialVersionUID = 1L;
@@ -60,7 +60,6 @@ public class Update${entity}Input implements Serializable {
 #end
 #end
 #if(${field.keyFlag})
-
 ## 普通字段
 #elseif(${field.fill})
 ## -----   存在字段填充设置   -----

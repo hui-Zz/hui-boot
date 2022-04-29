@@ -1,6 +1,6 @@
-package com.hui.project.model.input;
+package com.hui.project.model.dto;
 
-import com.hui.project.common.base.BaseConvertModel;
+import com.hui.project.common.base.BaseTimeIdModel;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
@@ -17,8 +17,8 @@ import lombok.experimental.Accessors;
 @Data
 @EqualsAndHashCode(callSuper = true)
 @Accessors(chain = true)
-@ApiModel(value = "SysRole创建输入对象", description = "角色信息表")
-public class CreateRoleInput extends BaseConvertModel {
+@ApiModel(value = "Role更新输入对象", description = "角色信息表")
+public class RoleDto extends BaseTimeIdModel {
 
     private static final long serialVersionUID = 1L;
 

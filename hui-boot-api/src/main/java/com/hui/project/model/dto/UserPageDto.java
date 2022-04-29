@@ -1,6 +1,6 @@
-package com.hui.project.model.input;
+package com.hui.project.model.dto;
 
-import com.hui.project.common.base.BaseTimeIdModel;
+import com.hui.project.common.page.PageDomain;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
@@ -19,8 +19,8 @@ import java.time.LocalDateTime;
 @Data
 @EqualsAndHashCode(callSuper = true)
 @Accessors(chain = true)
-@ApiModel(value = "User更新输入对象", description = "用户信息表")
-public class UpdateUserInput extends BaseTimeIdModel {
+@ApiModel(value = "User分页输入对象", description = "用户信息表")
+public class UserPageDto extends PageDomain {
 
     private static final long serialVersionUID = 1L;
 

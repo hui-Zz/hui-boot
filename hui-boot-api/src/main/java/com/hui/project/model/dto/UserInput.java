@@ -1,6 +1,6 @@
-package com.hui.project.model.vo;
+package com.hui.project.model.dto;
 
-import com.hui.project.common.page.PageDomain;
+import com.hui.project.common.base.BaseConvertModel;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
@@ -19,8 +19,8 @@ import java.time.LocalDateTime;
 @Data
 @EqualsAndHashCode(callSuper = true)
 @Accessors(chain = true)
-@ApiModel(value = "User分页输入对象", description = "用户信息表")
-public class DescribeUserPageVo extends PageDomain {
+@ApiModel(value = "SysRole创建输入对象", description = "用户信息表")
+public class UserInput extends BaseConvertModel {
 
     private static final long serialVersionUID = 1L;
 
