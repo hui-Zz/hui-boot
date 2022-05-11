@@ -53,23 +53,31 @@ import java.util.Objects;
  *
  * @author hui
  */
-public class MysqlGeneratorTest {
+public class GeneratorTest {
 
     int flag = 1; // 开关
+    // 多个表生成
     String[] tableNames = new String[]{
             "sys_user",
             "sys_role"
-    }; // 多个表生成
-    String outputDir = getJavaPath();  // 输出路径
-    String packagePath = "com.hui.project";  // 输出包路径
-    String packageBasePath = packagePath + ".common.base";
+    };
+    // 生成项目路径（到src\\main\\java）
+    String outputDir = getJavaPath();
+    // 生成父包路径
+    String outputParentPath = "com.hui.project";
+    String controllerPath = "web.controller";
     String entityPath = "model.entity.sys";
-    String packageEntityPath = packagePath + "." + entityPath;
-    String packageDtoPath = packagePath + ".model.dto";
-    String packageVoPath = packagePath + ".model.vo";
-    String packagePagePath = packagePath + ".common.page";
+    // 引用包路径import
+    String packagePath = outputParentPath + ".model";
     String packageCommonPath = "com.hui.project.common";  // 公共包路径
-    boolean POJOFlag = true; // 生成POJO开关
+    String packageBasePath = packageCommonPath + ".base";
+    // 引用类路径import
+    String packageEntityPath = packagePath + ".entity.sys";
+    String packageDtoPath = packagePath + ".dto";
+    String packageVoPath = packagePath + ".vo";
+    String packagePagePath = packageCommonPath + ".page";
+    // 生成POJO开关
+    boolean POJOFlag = true;
     boolean POJOCreateFlag = true;
     String POJOCreateDir = getRootPath() + "/src/main/java/com/hui/project/model"; // POJO文件路径
 
@@ -112,6 +120,21 @@ public class MysqlGeneratorTest {
         System.err.println(" TableName【 " + StringUtils.join(tableNames, ",") + " 】" + "Generator Success !");
     }
 
+    @Test
+    public void generateNotPOJO() {
+        if (flag != 1) {
+            return;
+        }
+        POJOCreateFlag = false;
+        TemplateConfig templateConfig = new TemplateConfig().setXml(null)
+                .setEntity(null).setEntityKt(null)
+                .setService(null).setServiceImpl(null)
+                .setMapper(null);
+        AutoGenerator mpg = getAutoGenerator(templateConfig);
+        mpg.execute();
+        System.err.println(" TableName【 " + StringUtils.join(tableNames, ",") + " 】" + "Generator Success !");
+    }
+
     /**
      * =================================================【生成代码方法】=================================================
      */
@@ -131,7 +154,7 @@ public class MysqlGeneratorTest {
      * @return
      */
     private String getRootPath() {
-        String file = Objects.requireNonNull(MysqlGeneratorTest.class.getClassLoader().getResource("")).getFile();
+        String file = Objects.requireNonNull(GeneratorTest.class.getClassLoader().getResource("")).getFile();
         return new File(file).getParentFile().getParent();
     }
 
@@ -252,8 +275,8 @@ public class MysqlGeneratorTest {
 
     protected PackageConfig getPackageConfig() {
         return new PackageConfig()
-                .setParent(packagePath) // 父路径包名
-                .setController("web.controller")// Controller路径
+                .setParent(outputParentPath) // 父路径包名
+                .setController(controllerPath)// Controller路径
                 .setEntity(entityPath) // Entity路径
                 .setMapper("mapper") // Mapper路径
                 .setService("service") // Service路径
@@ -271,14 +294,14 @@ public class MysqlGeneratorTest {
                     return POJOCreateDir + "/dto/" + underlineToPascal(tableInfo.getEntityName()) + "Input.java";
                 }
             });
-            focList.add(new FileOutConfig("/templates/entityUpdateInput.java.vm") {
+            focList.add(new FileOutConfig("/templates/entityUpdateDto.java.vm") {
                 // 自定义输出文件目录
                 @Override
                 public String outputFile(TableInfo tableInfo) {
                     return POJOCreateDir + "/dto/" + underlineToPascal(tableInfo.getEntityName()) + "Dto.java";
                 }
             });
-            focList.add(new FileOutConfig("/templates/entityPageInput.java.vm") {
+            focList.add(new FileOutConfig("/templates/entityPageDto.java.vm") {
                 // 自定义输出文件目录
                 @Override
                 public String outputFile(TableInfo tableInfo) {
