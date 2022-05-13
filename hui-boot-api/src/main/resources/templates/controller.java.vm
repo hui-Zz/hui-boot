@@ -23,8 +23,8 @@ import ${cfg.packageDtoPath}.*;
 import ${cfg.packageEntityPath}.*;
 import ${cfg.packageVoPath}.*;
 import ${cfg.packagePagePath}.*;
-import ${cfg.packageCommonPath}.base.Result;
-import ${cfg.packageCommonPath}.base.ResultGenerator;
+import ${cfg.packageResultPath}.Result;
+import ${cfg.packageResultPath}.ResultGenerator;
 
 import java.util.List;
 

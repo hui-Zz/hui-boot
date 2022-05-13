@@ -76,6 +76,7 @@ public class GeneratorTest {
     String packageDtoPath = packagePath + ".dto";
     String packageVoPath = packagePath + ".vo";
     String packagePagePath = packageCommonPath + ".page";
+    String packageResultPath = packageBasePath;
     // 生成POJO开关
     boolean POJOFlag = true;
     boolean POJOCreateFlag = true;
@@ -330,11 +331,12 @@ public class GeneratorTest {
                 map.put("obj", underlineToPascal(modulePath));
                 map.put("packagePath", packagePath);
                 map.put("packageBasePath", packageBasePath);
+                map.put("packageCommonPath", packageCommonPath);
                 map.put("packageEntityPath", packageEntityPath);
                 map.put("packageDtoPath", packageDtoPath);
                 map.put("packageVoPath", packageVoPath);
                 map.put("packagePagePath", packagePagePath);
-                map.put("packageCommonPath", packageCommonPath);
+                map.put("packageResultPath", packageResultPath);
                 this.setMap(map);
             }
         }.setFileOutConfigList(focList);
