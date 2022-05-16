@@ -14,6 +14,15 @@ import lombok.experimental.Accessors;
 #end
 import javax.validation.constraints.*;
 
+## 判断有哪些字段
+#foreach($field in ${table.fields})
+#if(${field.propertyName.equals("id")})
+#set($fieldIdFlag=true)
+#end
+#if(${field.propertyName.equals("createTime")} || ${field.propertyName.equals("updateTime")} || ${field.propertyName.equals("modifyTime")})
+#set($fieldTimeFlag=true)
+#end
+#end
 /**
  * <p>
  * $!{table.comment}DTO
@@ -33,7 +42,13 @@ import javax.validation.constraints.*;
 #if(${swagger2})
 @ApiModel(value = "${entity}更新输入对象", description = "$!{table.comment}")
 #end
-#if(${superEntityClass})
+#if(${fieldIdFlag} && ${fieldTimeFlag})
+public class ${entity}Dto extends BaseTimeIdModel#if(${activeRecord})<${entity}>#end {
+#elseif(${fieldIdFlag})
+public class ${entity}Dto extends BaseIdModel#if(${activeRecord})<${entity}>#end {
+#elseif(${fieldTimeFlag})
+public class ${entity}Dto extends BaseTimeModel#if(${activeRecord})<${entity}>#end {
+#elseif(${superEntityClass})
 public class ${entity}Dto extends ${superEntityClass}#if(${activeRecord})<${entity}>#end {
 #elseif(${activeRecord})
 public class ${entity}Dto extends Model<${entity}> {
@@ -45,7 +60,7 @@ public class ${entity}Dto implements Serializable {
 ## ----------  BEGIN 字段循环遍历  ----------
 #foreach($field in ${table.fields})
 ## 排除不生成某些字段
-#if(!${field.propertyName.equals("createTime")} && !${field.propertyName.equals("updateTime")} && !${field.propertyName.equals("modifyTime")})
+#if(!${field.name.equals("id")} && !${field.propertyName.equals("createTime")} && !${field.propertyName.equals("updateTime")} && !${field.propertyName.equals("modifyTime")})
 
 #if(${field.keyFlag})
 #set($keyPropertyName=${field.propertyName})

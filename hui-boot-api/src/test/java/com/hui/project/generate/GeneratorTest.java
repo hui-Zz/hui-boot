@@ -247,10 +247,10 @@ public class GeneratorTest {
         strategyConfig.setNaming(NamingStrategy.underline_to_camel);// 表名生成策略
         //strategyConfig.setInclude(new String[] { "user" }) // 需要生成的表
         //自定义实体父类
-        strategyConfig.setSuperEntityClass(packageBasePath + ".BaseTimeIdModel");
+        strategyConfig.setSuperEntityClass(packageBasePath + ".BaseConvertModel");
         // 自定义实体，公共字段
-        strategyConfig.setSuperEntityColumns("id", "create_time", "update_time");
-        strategyConfig.setTableFillList(tableFillList);
+//        strategyConfig.setSuperEntityColumns("id", "createTime", "updateTime", "modifyTime");
+//        strategyConfig.setTableFillList(tableFillList);
         // 自定义 mapper 父类
         //strategyConfig.setSuperMapperClass(packageBaseName + ".BaseMapper")
         // 自定义 controller 父类
