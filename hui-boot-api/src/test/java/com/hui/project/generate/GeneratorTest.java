@@ -78,8 +78,8 @@ public class GeneratorTest {
     String packagePagePath = packageCommonPath + ".page";
     String packageResultPath = packageBasePath;
     // 生成POJO开关
-    boolean POJOFlag = true;
-    boolean POJOCreateFlag = true;
+    int POJOFlag = 1;
+    int POJOCreateFlag = 1;
     String POJOCreateDir = getRootPath() + "/src/main/java/com/hui/project/model"; // POJO文件路径
 
     @Test
@@ -87,7 +87,7 @@ public class GeneratorTest {
         if (flag != 1) {
             return;
         }
-        POJOCreateFlag = true;
+        POJOCreateFlag = 1;
         TemplateConfig templateConfig = new TemplateConfig().setXml(null);
         AutoGenerator mpg = getAutoGenerator(templateConfig);
         mpg.execute();
@@ -110,7 +110,7 @@ public class GeneratorTest {
         if (flag != 1) {
             return;
         }
-        POJOCreateFlag = true;
+        POJOCreateFlag = 1;
         TemplateConfig templateConfig = new TemplateConfig().setXml(null)
                 .setController(null)
                 .setService(null)
@@ -126,7 +126,7 @@ public class GeneratorTest {
         if (flag != 1) {
             return;
         }
-        POJOCreateFlag = false;
+        POJOCreateFlag = 0;
         TemplateConfig templateConfig = new TemplateConfig().setXml(null)
                 .setEntity(null).setEntityKt(null)
                 .setService(null).setServiceImpl(null)
@@ -287,7 +287,7 @@ public class GeneratorTest {
     protected InjectionConfig getInjectionConfig() {
         // 自定义生成模板
         List<FileOutConfig> focList = new ArrayList<FileOutConfig>();
-        if (POJOFlag && POJOCreateFlag) {
+        if (POJOFlag == 1 && POJOCreateFlag == 1) {
             focList.add(new FileOutConfig("/templates/entityCreateInput.java.vm") {
                 // 自定义输出文件目录
                 @Override

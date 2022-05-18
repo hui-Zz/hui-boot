@@ -46,7 +46,7 @@ public class ${entity}Input implements Serializable {
 ## ----------  BEGIN 字段循环遍历  ----------
 #foreach($field in ${table.fields})
 ## 排除不生成某些字段
-#if(!${field.propertyName.equals("createTime")} && !${field.propertyName.equals("updateTime")} && !${field.propertyName.equals("modifyTime")} && !${field.propertyName.equals("deleted")})
+#if(!${field.name.equals("id")} && !${field.propertyName.equals("createTime")} && !${field.propertyName.equals("updateTime")} && !${field.propertyName.equals("modifyTime")} && !${field.propertyName.equals("deleted")})
 
 #if(${field.keyFlag})
 #set($keyPropertyName=${field.propertyName})

@@ -42,12 +42,8 @@ import javax.validation.constraints.*;
 #if(${swagger2})
 @ApiModel(value = "${entity}更新输入对象", description = "$!{table.comment}")
 #end
-#if(${fieldIdFlag} && ${fieldTimeFlag})
-public class ${entity}Dto extends BaseTimeIdModel#if(${activeRecord})<${entity}>#end {
-#elseif(${fieldIdFlag})
+#if(${fieldIdFlag})
 public class ${entity}Dto extends BaseIdModel#if(${activeRecord})<${entity}>#end {
-#elseif(${fieldTimeFlag})
-public class ${entity}Dto extends BaseTimeModel#if(${activeRecord})<${entity}>#end {
 #elseif(${superEntityClass})
 public class ${entity}Dto extends ${superEntityClass}#if(${activeRecord})<${entity}>#end {
 #elseif(${activeRecord})
