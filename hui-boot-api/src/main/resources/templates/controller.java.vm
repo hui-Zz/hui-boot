@@ -29,7 +29,7 @@ import ${cfg.packageResultPath}.ResultGenerator;
 import java.util.List;
 
 /**
- * $!{table.comment}
+ * ${cfg.tableComment}
  *
  * @author ${author}
  */
@@ -46,7 +46,7 @@ public class ${table.controllerName} extends ${superControllerClass} {
     private ${table.serviceName} ${table.entityPath}Service;
 
     /**
-     * 查询$!{table.comment}
+     * 查询${cfg.tableComment}
      */
     @GetMapping("/info")
     public Result info(@RequestParam String id) {
@@ -54,7 +54,7 @@ public class ${table.controllerName} extends ${superControllerClass} {
     }
 
     /**
-    * $!{table.comment}列表分页
+    * ${cfg.tableComment}列表分页
     */
     @GetMapping("/list")
     public Result page(${entity}PageDto dto) {
@@ -65,7 +65,7 @@ public class ${table.controllerName} extends ${superControllerClass} {
     }
 
     /**
-    * 添加$!{table.comment}
+    * 添加${cfg.tableComment}
     */
     @PostMapping("/add")
     public Result add(@RequestBody @Validated ${entity}Input input) {
@@ -74,7 +74,7 @@ public class ${table.controllerName} extends ${superControllerClass} {
     }
 
     /**
-    * 修改$!{table.comment}
+    * 修改${cfg.tableComment}
     */
     @PostMapping("/edit")
     public Result edit(@RequestBody @Validated ${entity}Dto dto) {
@@ -85,7 +85,7 @@ public class ${table.controllerName} extends ${superControllerClass} {
     }
 
     /**
-    * 删除$!{table.comment}
+    * 删除${cfg.tableComment}
     */
     @PostMapping("/delete")
     public Result delete(@RequestParam String id) {

@@ -5,7 +5,7 @@ import ${package.Entity}.${entity};
 
 /**
  * <p>
- * $!{table.comment} 服务类
+ * ${cfg.tableComment} 服务类
  * </p>
  *
  * @author ${author}
