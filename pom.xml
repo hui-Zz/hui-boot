@@ -27,7 +27,7 @@
         <swagger.version>2.9.2</swagger.version>
         <mybatisplus-boot-starter.version>3.0.3</mybatisplus-boot-starter.version>
         <jsonwebtoken.version>0.9.1</jsonwebtoken.version>
-        <fastjson.version>1.2.47</fastjson.version>
+        <fastjson.version>1.2.83</fastjson.version>
         <fastdfs-client-java.version>1.27-RELEASE</fastdfs-client-java.version>
         <commons-lang3.version>3.8.1</commons-lang3.version>
         <modelmapper.version>2.3.1</modelmapper.version>
