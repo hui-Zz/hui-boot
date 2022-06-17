@@ -3,6 +3,7 @@ package ${package.Entity};
 #foreach($pkg in ${table.importPackages})
 import ${pkg};
 #end
+import ${cfg.packageBasePath}.*;
 #if(${swagger2})
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
@@ -13,6 +14,15 @@ import lombok.EqualsAndHashCode;
 import lombok.experimental.Accessors;
 #end
 
+## 判断有哪些字段
+#foreach($field in ${table.fields})
+#if(${field.propertyName.equals("id")})
+#set($fieldIdFlag=true)
+#end
+#if(${field.propertyName.equals("createTime")} || ${field.propertyName.equals("updateTime")} || ${field.propertyName.equals("modifyTime")})
+#set($fieldTimeFlag=true)
+#end
+#end
 /**
  * <p>
  * $!{table.comment}
@@ -35,7 +45,13 @@ import lombok.experimental.Accessors;
 #if(${swagger2})
 @ApiModel(value = "${cfg.tableNamePascal}对象", description = "$!{table.comment}")
 #end
-#if(${superEntityClass})
+#if(${fieldIdFlag} && ${fieldTimeFlag})
+public class ${entity} extends BaseTimeIdModel#if(${activeRecord})<${entity}>#end {
+#elseif(${fieldIdFlag})
+public class ${entity} extends BaseIdModel#if(${activeRecord})<${entity}>#end {
+#elseif(${fieldTimeFlag})
+public class ${entity} extends BaseTimeModel#if(${activeRecord})<${entity}>#end {
+#elseif(${superEntityClass})
 public class ${entity} extends ${superEntityClass}#if(${activeRecord})<${entity}>#end {
 #elseif(${activeRecord})
 public class ${entity} extends Model<${entity}> {
@@ -47,7 +63,7 @@ public class ${entity} implements Serializable {
 ## ----------  BEGIN 字段循环遍历  ----------
 #foreach($field in ${table.fields})
 ## 排除不生成某些字段
-#if(!${field.propertyName.equals("createTime")} && !${field.propertyName.equals("updateTime")} && !${field.propertyName.equals("modifyTime")})
+#if(!${field.name.equals("id")} && !${field.propertyName.equals("createTime")} && !${field.propertyName.equals("updateTime")} && !${field.propertyName.equals("modifyTime")})
 
 #if(${field.keyFlag})
 #set($keyPropertyName=${field.propertyName})

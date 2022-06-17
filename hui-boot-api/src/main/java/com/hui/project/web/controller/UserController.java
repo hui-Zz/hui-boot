@@ -34,7 +34,6 @@ import java.util.List;
 @Api(tags = {"用户信息表"})
 @RestController
 @RequestMapping(value = "/api/user", produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
-
 @Validated
 public class UserController extends BaseController {
 
@@ -52,7 +51,7 @@ public class UserController extends BaseController {
 
     @ApiOperation("用户信息表列表分页")
     @GetMapping("/list")
-    public Result page(UserPageDto userPageDto) {
+    public Result page(UserPageDto dto) {
         startPage();
         startOrderBy();
         List<User> list = userService.list(new LambdaQueryWrapper<User>());
@@ -61,16 +60,16 @@ public class UserController extends BaseController {
 
     @ApiOperation("添加用户信息表")
     @PostMapping("/add")
-    public Result add(@RequestBody @Validated UserInput userInput) {
-        User user = userInput.convert(User.class);
+    public Result add(@RequestBody @Validated UserInput input) {
+        User user = input.convert(User.class);
         return ResultGenerator.getSuccessResult(userService.save(user));
     }
 
 
     @ApiOperation("修改用户信息表")
     @PostMapping("/edit")
-    public Result edit(@RequestBody @Validated(UserDto.Update.class) UserDto userDto) {
-        User user = userDto.convert(User.class);
+    public Result edit(@RequestBody @Validated(UserDto.Update.class) UserDto dto) {
+        User user = dto.convert(User.class);
         User old = userService.getById(user.getId());
         Assert.notNull(old, "要修改的数据不存在！");
         return ResultGenerator.getSuccessResult(userService.updateById(user));

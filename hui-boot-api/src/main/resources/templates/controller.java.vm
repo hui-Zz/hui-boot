@@ -25,37 +25,36 @@ import ${cfg.packageDtoPath}.*;
 import ${cfg.packageEntityPath}.*;
 import ${cfg.packageVoPath}.*;
 import ${cfg.packagePagePath}.*;
-import ${cfg.packageCommonPath}.base.Result;
-import ${cfg.packageCommonPath}.base.ResultGenerator;
+import ${cfg.packageResultPath}.Result;
+import ${cfg.packageResultPath}.ResultGenerator;
 
 import java.util.List;
 
 /**
- * $!{table.comment} 前端控制器
+ * ${cfg.tableComment}
  *
  * @author ${author}
  */
-@Api(tags = {"${table.comment}"})
+@Api(tags = {"${cfg.tableComment}"})
 #if(${restControllerStyle})
 @RestController
 #else
 @Controller
 #end
 @RequestMapping(value = "#if(${package.ModuleName})/${package.ModuleName}#end/api/#if(${controllerMappingHyphenStyle})${controllerMappingHyphen}#else${table.entityPath}#end", produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
-
 @Validated
 public class ${table.controllerName} extends ${superControllerClass} {
 
     @Autowired
     private ${table.serviceName} ${table.entityPath}Service;
 
-    @ApiOperation("查询$!{table.comment}")
+    @ApiOperation("查询${cfg.tableComment}")
     @GetMapping("/info")
     public Result info(@RequestParam String id) {
         return ResultGenerator.getSuccessResult(${table.entityPath}Service.getById(id));
     }
 
-    @ApiOperation("$!{table.comment}列表分页")
+    @ApiOperation("${cfg.tableComment}列表分页")
     @GetMapping("/list")
     public Result page(${entity}PageDto dto) {
         startPage();
@@ -64,7 +63,7 @@ public class ${table.controllerName} extends ${superControllerClass} {
         return ResultGenerator.getSuccessResult(getDataTable(list));
     }
 
-    @ApiOperation("添加$!{table.comment}")
+    @ApiOperation("添加${cfg.tableComment}")
     @PostMapping("/add")
     public Result add(@RequestBody @Validated ${entity}Input input) {
         ${entity} ${table.entityPath} = input.convert(${entity}.class);
@@ -72,7 +71,7 @@ public class ${table.controllerName} extends ${superControllerClass} {
     }
 
 
-    @ApiOperation("修改$!{table.comment}")
+    @ApiOperation("修改${cfg.tableComment}")
     @PostMapping("/edit")
     public Result edit(@RequestBody @Validated ${entity}Dto dto) {
         ${entity} ${table.entityPath} = dto.convert(${entity}.class);
@@ -82,7 +81,7 @@ public class ${table.controllerName} extends ${superControllerClass} {
     }
 
 
-    @ApiOperation("删除$!{table.comment}")
+    @ApiOperation("删除${cfg.tableComment}")
     @PostMapping("/delete")
     public Result delete(@RequestParam String id) {
         return ResultGenerator.getSuccessResult(${table.entityPath}Service.removeById(id));

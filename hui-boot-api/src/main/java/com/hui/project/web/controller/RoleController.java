@@ -32,7 +32,6 @@ import java.util.List;
 @Api(tags = {"角色信息表"})
 @RestController
 @RequestMapping(value = "/api/role", produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
-
 @Validated
 public class RoleController extends BaseController {
 
@@ -47,7 +46,7 @@ public class RoleController extends BaseController {
 
     @ApiOperation("角色信息表列表分页")
     @GetMapping("/list")
-    public Result page(RolePageDto rolePageDto) {
+    public Result page(RolePageDto dto) {
         startPage();
         startOrderBy();
         List<Role> list = roleService.list(new LambdaQueryWrapper<Role>());
@@ -56,16 +55,16 @@ public class RoleController extends BaseController {
 
     @ApiOperation("添加角色信息表")
     @PostMapping("/add")
-    public Result add(@RequestBody @Validated RoleInput roleInput) {
-        Role role = roleInput.convert(Role.class);
+    public Result add(@RequestBody @Validated RoleInput input) {
+        Role role = input.convert(Role.class);
         return ResultGenerator.getSuccessResult(roleService.save(role));
     }
 
 
     @ApiOperation("修改角色信息表")
     @PostMapping("/edit")
-    public Result edit(@RequestBody @Validated(RoleDto.Update.class) RoleDto roleDto) {
-        Role role = roleDto.convert(Role.class);
+    public Result edit(@RequestBody @Validated(RoleDto.Update.class) RoleDto dto) {
+        Role role = dto.convert(Role.class);
         Role old = roleService.getById(role.getId());
         Assert.notNull(old, "要修改的数据不存在！");
         return ResultGenerator.getSuccessResult(roleService.updateById(role));
